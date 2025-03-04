@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Tutoring Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+    integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+    integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .my{
+            color: rgb(44,174,196);
+        }
+        
+
+        .contact1 {
+            max-width: 1000px;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #1312129d;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            border: 3px solid rgb(231, 236, 236);
+        }
+        .nav-link {
+            color: #2aacbd;
+            font-weight: bold;
+        }
+        .nav-link:hover {
+            color:  #2aacbd;
+            text-decoration: underline;
+        }
+        .tab-content > .tab-pane {
+            margin-top: 20px;
+        }
+        /* .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        } */
+        .form-control, .form-select {
+            background-color: #f5f5f5;
+        }
+        .tutorial-content {
+            display: none; /* Hide all tutorial content by default */
+            margin-top: 20px;
+        }
+        .feedback-display {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #e8edf1;
+            border-radius: 5px;
+            background-color: #e7f3ff;
+        }
+        .feedback-buttons {
+            margin-top: 10px;
+        }
+        .feedback-display {
+            margin-top: 20px;
+        }
+        .btn:hover{
+    background-color:rgb(23, 65, 65);
+    color: #f3ecec;
+    border: 2px solid rgb(149, 191, 216);
+}
+.btn{
+    background-color:rgb(35, 71, 71);
+    color: #64a6b6;
+    border: 2px solid white;
+    
+}
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="images/logo.png" alt="">
+              </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="index.html">𝐇𝐨𝐦𝐞</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="profile.html">𝐏𝐫𝐨𝐟𝐢𝐥𝐞</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="booking.html">𝐁𝐨𝐨𝐤𝐢𝐧𝐠</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="TeleVisit.html">𝐓𝐞𝐥𝐞𝐕𝐢𝐬𝐢𝐭</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="Notifications.html">𝐍𝐨𝐭𝐢𝐟𝐢𝐜𝐚𝐭𝐢𝐨𝐧𝐬</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="insights.html">𝐇𝐞𝐚𝐥𝐭𝐡 𝐈𝐧𝐬𝐢𝐠𝐡𝐭𝐬</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="Help.html">𝐇𝐞𝐥𝐩</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="login.html" id="logoutButton">𝐋𝐨𝐠𝐨𝐮𝐭</a>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="container contact1">
+        <h2 class="text-center text-white"><b>Telemedicine Support Center</b></h2>
+    
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-tabs mt-5" id="supportTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="tutorials-tab" data-bs-toggle="tab" data-bs-target="#tutorials" type="button" role="tab" aria-controls="tutorials" aria-selected="true">Tutorials</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="faq-tab" data-bs-toggle="tab" data-bs-target="#faq" type="button" role="tab" aria-controls="faq" aria-selected="false">FAQs</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact Support</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="feedback-tab" data-bs-toggle="tab" data-bs-target="#feedback" type="button" role="tab" aria-controls="feedback" aria-selected="false">Feedback</button>
+            </li>
+        </ul>
+    
+        <div class="tab-content" id="supportTabContent">
+            <!-- Tutorials Section -->
+            <div class="tab-pane fade show active" id="tutorials" role="tabpanel" aria-labelledby="tutorials-tab">
+                <h3 class="text-white"><b>Tutorials</b></h3>
+                <ul class="my">
+                    <li><a href="#" onclick="showTutorial('scheduleAppointment')">How to Schedule a Telemedicine Appointment</a></li>
+                    <li><a href="#" onclick="showTutorial('virtualWaitingRoom')">Using the Virtual Waiting Room</a></li>
+                    <li><a href="#" onclick="showTutorial('accessMedicalReports')">Accessing Medical Reports</a></li>
+                </ul>
+                
+                <!-- Tutorial Content Sections -->
+                <div id="scheduleAppointment" class="tutorial-content">
+                    <h4>How to Schedule a Telemedicine Appointment</h4>
+                    <p>Follow these steps to schedule your appointment.</p>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/t6p5awu5LxM?si=oK7po1J0Y350o837" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div id="virtualWaitingRoom" class="tutorial-content">
+                    <h4>Using the Virtual Waiting Room</h4>
+                    <p>Learn how to navigate the virtual waiting room effectively.</p>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/ZAdglSHU7uQ?si=6NhFDEINH8wY2nOt" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div id="accessMedicalReports" class="tutorial-content">
+                    <h4>Accessing Medical Reports</h4>
+                    <p>Steps to access your medical reports online.</p>
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/CSLFV5NbLlo?si=7I8SeegAxQo7Gn-i" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+           
+    
+          <!-- FAQs Section -->
+<div class="tab-pane fade" id="faq" role="tabpanel" aria-labelledby="faq-tab">
+    <h3 class="text-white text-center mt-3"><b>Frequently Asked Questions</b></h3>
+    <div class="accordion" id="faqAccordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faq1">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                    What is telemedicine?
+                </button>
+            </h2>
+            <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="faq1" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Telemedicine allows you to connect with healthcare providers through a secure platform, enabling consultations without the need to visit a clinic in person.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faq2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                    How secure are my consultations?
+                </button>
+            </h2>
+            <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Our telemedicine platform is encrypted to ensure confidentiality and adheres to privacy regulations such as HIPAA and GDPR.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faq3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                    What equipment do I need?
+                </button>
+            </h2>
+            <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    You need a device with a camera and microphone (such as a smartphone or computer) and a stable internet connection.
+                </div>
+            </div>
+        </div>
+
+        <!-- New FAQ Questions -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faq4">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                    How do I book a telemedicine appointment?
+                </button>
+            </h2>
+            <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="faq4" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    You can book a telemedicine appointment through our website by selecting your preferred healthcare provider and choosing a convenient time slot.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faq5">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                    Can I get prescriptions through telemedicine?
+                </button>
+            </h2>
+            <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="faq5" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Yes, licensed healthcare providers can prescribe medications during your telemedicine consultation, if appropriate.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faq6">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                    What if I have technical issues during my appointment?
+                </button>
+            </h2>
+            <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="faq6" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    If you experience technical issues during your appointment, please contact our support team for assistance.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+          <!-- Contact Support Form -->
+<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+    <h3 class="text-white text-center mt-3"><b>Contact Support</b></h3>
+    <form id="supportForm" onsubmit="return submitSupportForm(event);">
+        <div class="mb-3">
+            <label for="supportEmail" class="form-label my"><b>Email:</b></label>
+            <input type="email" class="form-control" id="supportEmail" required>
+            <div class="invalid-feedback">Please enter a valid email address.</div>
+            <div class="email-error text-danger" style="display: none;">Email format is invalid.</div>
+        </div>
+        <div class="mb-3">
+            <label for="supportSubject" class="form-label my"><b>Subject:</b></label>
+            <input type="text" class="form-control" id="supportSubject" required>
+            <div class="invalid-feedback">Subject is required.</div>
+        </div>
+        <div class="mb-3">
+            <label for="supportMessage" class="form-label my"><b>Message:</b></label>
+            <textarea class="form-control" id="supportMessage" rows="4" required></textarea>
+            <div class="invalid-feedback">Please enter a message.</div>
+        </div>
+        <button type="submit" class="btn ">Submit</button>
+    </form>
+</div>
+
+           <!-- Feedback Form -->
+<div class="tab-pane fade" id="feedback" role="tabpanel" aria-labelledby="feedback-tab">
+    <h3 class="text-center text-white"><b>Feedback</b></h3>
+    <form id="feedbackForm">
+        <div class="mb-3">
+            <label for="feedbackType" class="form-label my"><b>Feedback Type:</b></label>
+            <select class="form-select" id="feedbackType" required onchange="checkFormValidity()">
+                <option value="" disabled selected>Select Feedback Type</option>
+                <option value="compliment">Compliment</option>
+                <option value="suggestion">Suggestion</option>
+                <option value="complaint">Complaint</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="feedbackMessage" class="form-label my"><b>Your Feedback:</b></label>
+            <textarea class="form-control" id="feedbackMessage" rows="4" required oninput="checkFormValidity()"></textarea>
+        </div>
+        <button type="button" class="btn btn-primary" id="submitFeedbackButton" onclick="submitFeedback()" disabled>Submit Feedback</button>
+    </form>
+
+    <!-- Feedback Display Section -->
+    <div id="feedbackDisplay" class="feedback-display" style="display:none;">
+        <h4>Your Feedback</h4>
+        <p id="feedbackContent"></p>
+        <div class="feedback-buttons">
+            <button class="btn btn-success" onclick="editFeedback()">Edit</button>
+            <button class="btn btn-danger" onclick="deleteFeedback()">Delete</button>
+        </div>
+    </div>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function showTutorial(tutorialId) {
+            const tutorials = document.querySelectorAll('.tutorial-content');
+            tutorials.forEach(tutorial => {
+                tutorial.style.display = 'none'; // Hide all tutorials
+            });
+            document.getElementById(tutorialId).style.display = 'block'; // Show selected tutorial
+        }
+    
+        function submitSupportForm() {
+            const email = document.getElementById('supportEmail').value;
+            const subject = document.getElementById('supportSubject').value;
+            const message = document.getElementById('supportMessage').value;
+    
+            Swal.fire({
+                title: 'Support Request Submitted!',
+                text: 'We will get back to you soon.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+            
+            // Clear the form
+            document.getElementById('supportForm').reset();
+        }
+    
+        function submitFeedback() {
+            const feedbackType = document.getElementById('feedbackType').value;
+            const feedbackMessage = document.getElementById('feedbackMessage').value;
+    
+            Swal.fire({
+                title: 'Feedback Submitted!',
+                text: 'Thank you for your feedback!',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Show the feedback content
+                    document.getElementById('feedbackContent').innerText = `Type: ${feedbackType}, Message: ${feedbackMessage}`;
+                    document.getElementById('feedbackDisplay').style.display = 'block';
+                    // Clear the feedback form
+                    document.getElementById('feedbackForm').reset();
+                }
+            });
+        }
+    
+        function editFeedback() {
+            const feedbackContent = document.getElementById('feedbackContent').innerText;
+            const feedbackParts = feedbackContent.split(', ');
+    
+            document.getElementById('feedbackType').value = feedbackParts[0].split(': ')[1];
+            document.getElementById('feedbackMessage').value = feedbackParts[1].split(': ')[1];
+            document.getElementById('feedbackDisplay').style.display = 'none'; // Hide feedback display
+        }
+    
+        function deleteFeedback() {
+            document.getElementById('feedbackDisplay').style.display = 'none'; // Hide feedback display
+            Swal.fire({
+                title: 'Feedback Deleted!',
+                text: 'Your feedback has been successfully deleted.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        }
+    </script>
+  <script>
+    function submitSupportForm(event) {
+        event.preventDefault(); // Prevent form submission
+    
+        // Get form elements
+        const email = document.getElementById('supportEmail');
+        const subject = document.getElementById('supportSubject');
+        const message = document.getElementById('supportMessage');
+        const emailError = document.querySelector('.email-error');
+    
+        // Clear previous validation
+        email.classList.remove('is-invalid');
+        subject.classList.remove('is-invalid');
+        message.classList.remove('is-invalid');
+        emailError.style.display = 'none'; // Hide email error
+    
+        let valid = true;
+    
+        // Custom email validation using regex
+        const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z-]+\.[A-Za-z]{2,}$/;
+    
+        // Validate email
+        if (!emailRegex.test(email.value)) {
+            email.classList.add('is-invalid');
+            emailError.style.display = 'block'; // Show custom email error
+            valid = false;
+        }
+    
+        // Validate subject
+        if (!subject.value) {
+            subject.classList.add('is-invalid');
+            valid = false;
+        }
+    
+        // Validate message
+        if (!message.value) {
+            message.classList.add('is-invalid');
+            valid = false;
+        }
+    
+        // If the form is valid, submit it (e.g., via AJAX or other methods)
+        if (valid) {
+            alert('Form submitted successfully!'); // Replace with your submission logic
+            // You can also reset the form here if needed
+            document.getElementById('supportForm').reset();
+        }
+    }
+    </script>
+    
+    <style>
+    .is-invalid {
+        border-color: red; /* Highlight invalid fields */
+    }
+    .email-error {
+        font-size: 0.875rem; /* Adjust size of email error message */
+    }
+    </style>
+    <script>
+        function checkFormValidity() {
+            const feedbackType = document.getElementById('feedbackType');
+            const feedbackMessage = document.getElementById('feedbackMessage');
+            const submitButton = document.getElementById('submitFeedbackButton');
+        
+            // Enable the button if all required fields are filled
+            if (feedbackType.value && feedbackMessage.value) {
+                submitButton.disabled = false;
+            } else {
+                submitButton.disabled = true;
+            }
+        }
+        
+        function submitFeedback() {
+            const feedbackType = document.getElementById('feedbackType').value;
+            const feedbackMessage = document.getElementById('feedbackMessage').value;
+        
+            // Display the feedback in the feedback display section
+            document.getElementById('feedbackContent').innerText = `Type: ${feedbackType}\nFeedback: ${feedbackMessage}`;
+            document.getElementById('feedbackDisplay').style.display = 'block';
+            // Optionally, reset the form after submission
+            document.getElementById('feedbackForm').reset();
+            checkFormValidity(); // Reset button state
+        }
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            window.close(); 
+            window.opener.location.href = 'login.html'; 
+        });
+        </script>
+        
+       
+      
+      </body>
+      </html>

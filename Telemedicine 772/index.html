@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Tutoring Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+    integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+    integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .card {
+            background-color: rgba(14, 13, 13, 0.582);
+            border: 2px solid rgb(67, 192, 192);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-color: rgb(136, 224, 210);
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin: 0 0 10px;
+            font-size: 1.2em;
+        }
+
+        .card p {
+            margin: 0 0 15px;
+            /* color: rgb(150, 30, 30); */
+        }
+
+        .card .price {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .row-view-more {
+            text-align: center;
+            margin: 20px 0;
+            /* padding-left: calc(var(--bs-gutter-x)* .5); */
+        }
+
+        .view-more {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: rgb(87, 188, 191);
+            color: rgb(2, 2, 2);
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .view-more:hover {
+            background-color: rgb(73, 216, 216);
+            box-shadow: 2px 2px 2px 2px rgb(177, 104, 104);
+        }
+
+        /* Style for the search bar */
+        .search-bar {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .search-bar input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            border: 4px solid #111110;
+            outline: none;
+        }
+        .my{
+            color: rgb(44,174,196);
+        }
+        
+
+header {
+    /* Create grid spanning viewport width & height */
+    display: grid;
+    grid-template-rows: 70vh;
+    overflow: hidden;
+    box-shadow: 0 0.2em 0.5em rgba(0, 0, 0, 0.5);
+}
+
+.video-bg {
+    /* Span the full grid */
+    grid-area: var(--fullGrid);
+
+    /* Re-size video to cover full screen while maintaining aspect ratio */
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+
+    /* Display video below overlay */
+    z-index: -1;
+}
+
+.video-bg::-webkit-media-controls {
+    display: none !important;
+}
+
+.video-overlay {
+    /* Span the full grid */
+    grid-area: var(--fullGrid);
+
+    /* Center Content */
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+
+    /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.55);
+}
+:root {   
+    font-size: 10px;
+    --fullGrid: 1 / 1 / -1 / -1;
+}
+
+body {
+    font-family: "Montserrat", Arial, sans-serif;
+    background-color: #fcfcfc;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="images/logo.png" alt="">
+              </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="index.html">𝐇𝐨𝐦𝐞</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="profile.html">𝐏𝐫𝐨𝐟𝐢𝐥𝐞</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="booking.html">𝐁𝐨𝐨𝐤𝐢𝐧𝐠</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="TeleVisit.html">𝐓𝐞𝐥𝐞𝐕𝐢𝐬𝐢𝐭</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Notifications.html">𝐍𝐨𝐭𝐢𝐟𝐢𝐜𝐚𝐭𝐢𝐨𝐧𝐬</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="insights.html">𝐇𝐞𝐚𝐥𝐭𝐡 𝐈𝐧𝐬𝐢𝐠𝐡𝐭𝐬</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Help.html">𝐇𝐞𝐥𝐩</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="login.html" id="logoutButton">𝐋𝐨𝐠𝐨𝐮𝐭</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <header>
+                <!-- Video from coverr.co -->
+                <video class="video-bg" autoplay muted loop>
+                    <source src="https://videos.pexels.com/video-files/7195995/7195995-sd_960_506_25fps.mp4" type="video/mp4" />
+                    <source src="https://videos.pexels.com/video-files/7195995/7195995-sd_960_506_25fps.mp4" type="video/webm" />
+                </video>
+                <div class="video-overlay">
+                    <h1 class="my">"Hello! Welcome to your virtual appointment.<br> We’re excited to connect with you today.</h1>
+                </div>
+            </header>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+    
+ <!-- Search Bar Start -->
+ <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search for categories...">
+</div>
+<!-- Search Bar End -->
+
+<div class="d-flex justify-content-center">
+    <h1 class="my-4 my5"><b>Telemedicine</b></h1>
+</div>
+
+<div class="container category-container my-2">
+    <!-- Healthcare Providers Section -->
+    <div class="category">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <h3 class="my-3"><b>Healthcare Providers</b></h3>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <!-- First Row -->
+            <div class="col-12 col-md-4">
+                <div class="card text-center">
+                    <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQN5vLuD4wSEJKVde8DT_ZxgB1P8W0s9PTAkT2OLVORVMtF2M6sTjkHr4K7WbXbDz93voE&usqp=CAU" alt="Product Image 1">
+                    <div class="card-body">
+                        <h3 class="card-title text-white my">Tech in Healthcare:</h3>
+                        <p class="card-text my">Innovation in action: redefining patient care through technology.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card text-center">
+                    <img class="card-img-top" src="https://xpresshealth.co.uk/wp-content/uploads/2023/12/WhatsApp-Image-2023-12-28-at-11.01.26-AM.jpeg" alt="Product Image 2">
+                    <div class="card-body">
+                        <h3 class="card-title text-white my">Patient Preparing for a Virtual:</h3>
+                        <p class="card-text my">Ready for my telehealth appointment: health knows no boundaries.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card text-center">
+                    <img class="card-img-top" src="data:image/jpeg;base64,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" alt="Product Image 3">
+                    <div class="card-body">
+                        <h3 class="card-title text-white my">Wellness Check via:</h3>
+                        <p class="card-text my">Prioritizing your health with ease: regular check-ins, redefined.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Medical Services Section -->
+    <div class="category">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <h3 class="my-3"><b>Medical Services</b></h3>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <!-- Second Row -->
+            <div class="col-12 col-md-4">
+                <div class="card text-center">
+                    <img class="card-img-top" src="https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Product Image 4">
+                    <div class="card-body">
+                        <h3 class="card-title text-white my">Laboratory Testing:</h3>
+                        <p class="card-text my">Precision in every test: ensuring accurate diagnoses for better treatment.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card text-center">
+                    <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj6PRW1NxcPj8WVUwEQrmZTv29ZYsId4xmfibb_VO8rvHUwi74fmzqI_u-t3MFK2VlNLA&usqp=CAU" alt="Product Image 5">
+                    <div class="card-body">
+                        <h3 class="card-title text-white my">Physical Therapy Session:</h3>
+                        <p class="card-text my">Rebuilding strength, one step at a time: physical therapy in action for better treatment.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card text-center">
+                    <img class="card-img-top" src="https://media.istockphoto.com/id/1451855084/photo/female-nurse-explaining-medical-treatment-to-patient-through-a-video-call-with-computer-in.jpg?s=612x612&w=0&k=20&c=fzh7Dc324u5_oqKpjwh7OuFTK8hbZbLb5FVX2_3w0aM=" alt="Product Image 6">
+                    <div class="card-body">
+                        <h3 class="card-title text-white my">Home Healthcare Services:</h3>
+                        <p class="card-text my">Define your stylish persona with these chic drop earrings crafted in 18 karat yellow gold.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resources Section -->
+    <div class="category">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <h3 class="my-3"><b>Resources</b></h3>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <!-- Third Row -->
+            <div class="col-12 col-md-4">
+                <div class="card text-center">
+                    <img class="card-img-top" src="https://amdtelemedicine.com/wp-content/uploads/2019/03/Here-are-a-six-tips-for-introducing-new-staff-to-telemedicine-and-telehealth_2029_40183008_0_14131353_500.jpg" alt="Product Image 7">
+                    <div class="card-body">
+                        <h3 class="card-title text-white my">Nutritionist Consulting Patient:</h3>
+                        <p class="card-text my">Nourishing your body and mind: personalized nutrition for a healthier.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card text-center">
+                    <img class="card-img-top" src="https://media.springernature.com/lw703/springer-static/image/art%3A10.1038%2Fs41584-022-00763-x/MediaObjects/41584_2022_763_Figa_HTML.png" alt="Product Image 7">
+                    <div class="card-body">
+                        <h3 class="card-title text-white my">Mental Health Support:</h3>
+                        <p class="card-text my">It’s okay to not be okay: seeking help is a sign of strength.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card text-center">
+                    <img class="card-img-top" src="https://dropinblog.net/34239538/files/featured/Telehealth.jpg" alt="Product Image 7">
+                    <div class="card-body">
+                        <h3 class="card-title text-white my">Doctor with Patient:</h3>
+                        <p class="card-text my">Empathy in action: every patient deserves to be heard and understood.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more cards as needed -->
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer py-4 mt-4">
+<div class="container">
+    <div class="row footer-content">
+        <!-- About Us Section -->
+        <div class="col-md-3 col-sm-6 footer-section about mb-4">
+            <h3 class="my5 my"><b>About Us</b></h3>
+            <p class="my5">"At TeleHealth Solutions, we provide a  virtual healthcare services designed to meet your medical needs from the comfort of your home. From expert consultations to personalized treatment plans, our platform ensures quality care and convenience at your fingertips."      </div>
+
+        <!-- Quick Links Section -->
+        <div class="col-md-3 col-sm-6 footer-section links mb-4">
+            <h3 class="my5 my"><b>Quick Links</b></h3>
+            <ul class="list-unstyled my5">
+                <li><a href="index.html" class="text-white">Home</a></li>
+                <li><a href="profile.html" class="text-white">profile</a></li>
+                <li><a href="booking.html" class="text-white">Booking</a></li>
+                <li><a href="TeleVisit.html" class="text-white">TeleVisit</a></li>
+                <li><a href="Notifications.html" class="text-white">Notifications</a></li>
+                <li><a href="insights.html" class="text-white">Health Insights</a></li>
+                <li><a href="Help.html" class="text-white">Help</a></li>
+                
+            </ul>
+        </div>
+
+        <!-- Contact Us Section -->
+        <div class="col-md-3 col-sm-6 footer-section contact mb-4">
+            <h3 class="my5 my"><b>Contact Us</b></h3>
+            <p class="my5"><b>Email:</b> : Telemedicine@123.com</p>
+            <p class="my5"><b>Phone:</b> +91 9922891234</p>
+            <p class="my5"><b>Address:</b> Vanasthalupuram, Hyderabad, India.</p>
+        </div>
+
+        <!-- Social Media Section -->
+        <div class="col-md-3 col-sm-6 footer-section social mb-4">
+            <h3 class="my5 my"><b>Follow Us</b></h3>
+            <a href="https://www.facebook.com/login/" class="social-icon text-white me-3"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://x.com/login?mx=2" class="social-icon text-white me-3"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/accounts/login/?hl=en" class="social-icon text-white me-3"><i class="fab fa-instagram"></i></a>
+                   </div>
+    </div>
+</div>
+<div class="footer-bottom text-center mt-4">
+    <p class="my5">&copy; 2024 : Telemedicine . All rights reserved.</p>
+</div>
+</footer>
+<script>
+    // JavaScript for filtering categories based on search input
+    document.getElementById('searchInput').addEventListener('input', function () {
+        const searchQuery = this.value.toLowerCase();
+        const categories = document.querySelectorAll('.category');
+
+        categories.forEach(category => {
+            const categoryTitle = category.querySelector('h3').textContent.toLowerCase();
+
+            if (categoryTitle.includes(searchQuery)) {
+                category.style.display = '';
+            } else {
+                category.style.display = 'none';
+            }
+        });
+    });
+    document.getElementById('logoutButton').addEventListener('click', function() {
+            window.close(); 
+            window.opener.location.href = 'login.html'; 
+        });
+</script>
+      
+      </body>
+      </html>

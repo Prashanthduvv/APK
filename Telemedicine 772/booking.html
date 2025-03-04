@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Tutoring Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .appointment-sheet,
+        .prescription-sheet,
+        .upload-section {
+            border: 1px solid #353030;
+            padding: 20px;
+            margin-top: 20px;
+            display: none; /* Hidden initially */
+        }
+
+        .btn-download,
+        .btn-print {
+            /* margin-top: 10px; */
+        }
+
+        .box {
+            border: 3px solid rgb(252, 252, 252);
+            border-radius: 20px;
+            padding: 20px;
+            background-color: rgba(16, 16, 17, 0.788);
+        }
+
+        .medical-records {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-top: 20px;
+            display: none; /* Hidden initially */
+        }
+        .schedule
+   {
+            max-width: 700px;
+            margin-top: 50px;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1, h4 {
+            color: #009688;
+        }
+        .calendar-container {
+            background-color:rgb(26,52,57);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 2px solid white;
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+        .calendar-day {
+            padding: 12px;
+            text-align: center;
+            background-color: #80cbc4;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .calendar-day.selected {
+            background-color: #004d40;
+            font-weight: bold;
+        }
+        #appointmentSheet {
+            display: none;
+            background-color: #555757;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .btn-custom {
+            background-color: #00796b;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #004d40;
+        }
+        .appointment-details {
+            margin-top: 15px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="images/logo.png" alt="">
+              </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="index.html">𝐇𝐨𝐦𝐞</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="profile.html">𝐏𝐫𝐨𝐟𝐢𝐥𝐞</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="booking.html">𝐁𝐨𝐨𝐤𝐢𝐧𝐠</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="TeleVisit.html">𝐓𝐞𝐥𝐞𝐕𝐢𝐬𝐢𝐭</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="Notifications.html">𝐍𝐨𝐭𝐢𝐟𝐢𝐜𝐚𝐭𝐢𝐨𝐧𝐬</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="insights.html">𝐇𝐞𝐚𝐥𝐭𝐡 𝐈𝐧𝐬𝐢𝐠𝐡𝐭𝐬</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="Help.html">𝐇𝐞𝐥𝐩</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="login.html" id="logoutButton">𝐋𝐨𝐠𝐨𝐮𝐭</a>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </nav>
+
+    <div class="container box mt-3">
+        <h1 class="text-white text-center">Appointment Booking</h1>
+        <form id="appointmentForm" class="text-white container">
+            <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                    <label for="provider" class="form-label"><b>Select Healthcare Provider:</b></label>
+                    <select class="form-select" id="provider" required>
+                        <option value="">-- Select Provider --</option>
+                        <option value="provider1">Dr. Smith</option>
+                        <option value="provider2">Dr. Johnson</option>
+                    </select>
+                </div>
+        
+                <div class="col-12 col-md-6 mb-3">
+                    <label for="date" class="form-label"><b>Select Date:</b></label>
+                    <input type="date" class="form-control" id="date" required>
+                </div>
+        
+                <div class="col-12 col-md-12 mb-3">
+                    <label for="time" class="form-label"><b>Select Time:</b></label>
+                    <select class="form-select" id="time" required>
+                        <option value="">-- Select Time --</option>
+                        <option value="9am">9:00 AM</option>
+                        <option value="10am">10:00 AM</option>
+                        <option value="11am">11:00 AM</option>
+                    </select>
+                </div>
+            </div>
+        
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-primary">Book Appointment</button>
+            </div>
+        
+            <p class="error text-danger text-center mt-2" id="formError"></p>
+        </form>
+        
+        <div id="appointmentSheet" class="appointment-sheet text-white text-center">
+            <h2 class="text-white">Appointment Confirmation</h2>
+            <p id="appointmentDetails"></p>
+            <a id="downloadLink" class="btn btn-success" href="#" download="appointment.txt">Download Appointment</a>
+          
+            <a class="btn btn-secondary btn-print" id="printButton">Print Appointment</a>
+        </div>
+
+        <!-- Medical Records Section -->
+        <h1 class="text-white text-center mt-5">Medical Records Access</h1>
+        <div class="text-center">
+            <button id="viewRecordsBtn" class="btn btn-info mt-3">View My Medical Records</button>
+
+        </div>
+
+        <div id="medicalRecords" class="medical-records text-white text-center">
+            <h2>Your Medical Records</h2>
+            <ul id="recordsList">
+                <li>Lab Results: Blood Test - 01/10/2024 - Normal</li>
+                <li>Treatment Plan: Physical Therapy - 03/15/2024 - Weekly sessions</li>
+                <li>Prescription History: Antibiotics - 02/20/2024 - 10 days</li>
+            </ul>
+            <button class="btn btn-primary mt-3" id="uploadRecordBtn">Upload New Record</button>
+        </div>
+
+        <!-- Upload Section: Displayed after clicking "Upload New Record" -->
+        <div id="uploadSection" class="upload-section text-white text-center">
+            <h2>Upload a New Medical Record</h2>
+            <input type="file" id="fileInput" class="form-control" accept="image/*">
+            <button class="btn btn-success mt-3" id="uploadFileBtn">Upload</button>
+            <div id="fileDetails" class="mt-3"></div>
+        </div>
+
+        <!-- Prescriptions Section -->
+        <h1 class="text-white text-center mt-5">Manage Prescriptions</h1>
+        <form id="prescriptionForm" class="text-white">
+            <label for="prescriptionProvider"><b>Select Healthcare Provider:</b></label>
+            <select class="form-select mt-3" id="prescriptionProvider" required>
+                <option value="">-- Select Provider --</option>
+                <option value="provider1">Dr. Smith</option>
+                <option value="provider2">Dr. Johnson</option>
+            </select>
+
+            <label for="medication"><b>Medication Name:</b></label>
+            <input type="text" class="form-control mt-3" id="medication" placeholder="Enter medication name" required>
+
+            <label for="dosage"><b>Dosage:</b></label>
+            <input type="text" class="form-control mt-3" id="dosage" placeholder="Enter dosage" required>
+
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-primary">Create Prescription</button>
+            </div>
+
+            <p class="error text-danger" id="prescriptionError"></p>
+        </form>
+
+        <div id="prescriptionSheet" class="prescription-sheet text-white text-center">
+            <h2>Prescription Confirmation</h2>
+            <p id="prescriptionDetails"></p>
+            <a id="prescriptionDownloadLink" class="btn btn-success" href="#" download="prescription.txt">Download Prescription</a>
+         
+        </div>
+    </div>
+ 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const dateInput = document.getElementById('date');
+
+            // Set tomorrow's date for appointment booking
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(today.getDate() + 1);
+            const year = tomorrow.getFullYear();
+            const month = ('0' + (tomorrow.getMonth() + 1)).slice(-2);
+            const day = ('0' + tomorrow.getDate()).slice(-2);
+            dateInput.min = `${year}-${month}-${day}`;
+
+            // Appointment form submission and SweetAlert confirmation
+            const form = document.getElementById('appointmentForm');
+            const appointmentSheet = document.getElementById('appointmentSheet');
+            const appointmentDetails = document.getElementById('appointmentDetails');
+            const downloadLink = document.getElementById('downloadLink');   const printButton = document.getElementById('printButton');
+            const formError = document.getElementById('formError');
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const provider = document.getElementById('provider').value;
+                const appointmentDate = document.getElementById('date').value;
+                const time = document.getElementById('time').value;
+
+                if (!provider || !appointmentDate || !time) {
+                    formError.innerText = "Please fill in all fields.";
+                    return;
+                }
+
+                const appointmentInfo = `Provider: ${provider}\nDate: ${appointmentDate}\nTime: ${time}`;
+                appointmentDetails.innerText = appointmentInfo;
+                appointmentSheet.style.display = 'block';
+                form.reset();
+
+                // SweetAlert success confirmation
+                Swal.fire({
+                    title: 'Appointment Booked!',
+                    text: 'Your appointment has been successfully booked.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+
+                // Generate download link
+                downloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(appointmentInfo);
+
+                // Print functionality
+                printButton.onclick = function () {
+                    const printWindow = window.open('', '_blank');
+                    printWindow.document.write('<pre>' + appointmentInfo + '</pre>');
+                    printWindow.document.close();
+                    printWindow.print();
+                };
+            });
+
+            // Medical Records access
+            const viewRecordsBtn = document.getElementById('viewRecordsBtn');
+            const medicalRecords = document.getElementById('medicalRecords');
+
+            viewRecordsBtn.addEventListener('click', function () {
+                medicalRecords.style.display = 'block';
+            });
+
+            // Upload Medical Records
+            const uploadRecordBtn = document.getElementById('uploadRecordBtn');
+            const uploadSection = document.getElementById('uploadSection');
+            const fileInput = document.getElementById('fileInput');
+            const uploadFileBtn = document.getElementById('uploadFileBtn');
+            const fileDetails = document.getElementById('fileDetails');
+
+            uploadRecordBtn.addEventListener('click', function () {
+                uploadSection.style.display = 'block';
+            });
+
+            uploadFileBtn.addEventListener('click', function () {
+                const file = fileInput.files[0];
+                if (file) {
+                    fileDetails.innerText = `Uploaded File: ${file.name}`;
+                }
+            });
+
+            // Prescription form submission
+            const prescriptionForm = document.getElementById('prescriptionForm');
+            const prescriptionSheet = document.getElementById('prescriptionSheet');
+            const prescriptionDetails = document.getElementById('prescriptionDetails');
+            const prescriptionError = document.getElementById('prescriptionError');
+
+            prescriptionForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const prescriptionProvider = document.getElementById('prescriptionProvider').value;
+                const medication = document.getElementById('medication').value;
+                const dosage = document.getElementById('dosage').value;
+
+                if (!prescriptionProvider || !medication || !dosage) {
+                    prescriptionError.innerText = "Please fill in all fields.";
+                    return;
+                }
+
+                const prescriptionInfo = `Provider: ${prescriptionProvider}\nMedication: ${medication}\nDosage: ${dosage}`;
+                prescriptionDetails.innerText = prescriptionInfo;
+                prescriptionSheet.style.display = 'block';
+                prescriptionForm.reset();
+  // Generate prescription download link
+  const prescriptionDownloadLink = document.getElementById('prescriptionDownloadLink');
+                prescriptionDownloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(prescriptionInfo);
+             });
+        });
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            window.close(); 
+            window.opener.location.href = 'login.html'; 
+        });
+    </script>
+
+</body>
+
+</html>

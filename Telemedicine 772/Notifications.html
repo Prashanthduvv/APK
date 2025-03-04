@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Tutoring Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+    integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+    integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .notifications-container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #0e0e0ec4;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      border: 2px solid white;
+      /* margin-bottom: 20px; */
+  }
+  .notifications-title {
+      color: #eff1f3;
+  }
+  .notification-appointments {
+      background-color: #d1ecf1; /* Light blue */
+      color: #0c5460; /* Dark blue */
+  }
+  .notification-prescriptions {
+      background-color: #d4edda; /* Light green */
+      color: #155724; /* Dark green */
+  }
+  .notification-alerts {
+      background-color: #f8d7da; /* Light red */
+      color: #4a721c; /* Dark red */
+  }
+  .my{
+      color: rgb(108, 206, 206);
+  }
+</style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="images/logo.png" alt="">
+              </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="index.html">𝐇𝐨𝐦𝐞</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="profile.html">𝐏𝐫𝐨𝐟𝐢𝐥𝐞</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="booking.html">𝐁𝐨𝐨𝐤𝐢𝐧𝐠</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="TeleVisit.html">𝐓𝐞𝐥𝐞𝐕𝐢𝐬𝐢𝐭</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="Notifications.html">𝐍𝐨𝐭𝐢𝐟𝐢𝐜𝐚𝐭𝐢𝐨𝐧𝐬</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="insights.html">𝐇𝐞𝐚𝐥𝐭𝐡 𝐈𝐧𝐬𝐢𝐠𝐡𝐭𝐬</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="Help.html">𝐇𝐞𝐥𝐩</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="login.html" id="logoutButton">𝐋𝐨𝐠𝐨𝐮𝐭</a>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </nav>
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+    <div class="notifications-container ">
+        <h1 class="notifications-title text-center text-white ">Notifications</h1>
+        <p class="notifications-description my text-center">Stay updated on your appointments, prescriptions, and important health alerts.</p>
+    
+        <!-- Notification Settings Form -->
+        <div class="notification-settings mt-4 my text-center">
+            <h2 class="text-white">Notification Settings</h2>
+            <form id="settingsForm" class="needs-validation" novalidate>
+                <div class="form-group mt-3">
+                    <label for="notificationFrequency">Notification Frequency</label>
+                    <select class="form-control mt-3" id="notificationFrequency" required>
+                        <option value="">Select Frequency</option>
+                        <option value="instant">Instant (Every 5 seconds)</option>
+                        <option value="daily">Daily (Every 10 seconds)</option>
+                        <option value="weekly">Weekly (Every 15 seconds)</option>
+                    </select>
+                    <div class="invalid-feedback">Please select a frequency.</div>
+                </div>
+                <div class="form-group mb-3 mt-3">
+                    <label for="notificationTypes">Notification Types</label>
+                    <select class="form-control mt-3" id="notificationTypes" required>
+                        <option value="">Select Notification Type</option>
+                        <option value="appointments">Appointments</option>
+                        <option value="prescriptions">Prescriptions</option>
+                        <option value="alerts">Alerts</option>
+                    </select>
+                    <div class="invalid-feedback">Please select a notification type.</div>
+                </div>
+                <button type="submit" class="btn btn-outline-primary">Save Settings</button>
+                <p class="form-feedback my mt-3" style="display: none;">Settings saved successfully! Notifications will appear below based on your preferences.</p>
+            </form>
+        </div>
+        
+        <!-- Notifications List -->
+        <div class="notifications-list mt-4 text-white text-center">
+            <h2 class="my">Your Notifications</h2>
+            <ul id="notificationItems" class="list-group">
+                <!-- Dynamic notifications will be added here -->
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="settingsToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Telemedicine</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body text-dark">
+                Notification settings saved successfully!
+            </div>
+        </div>
+    </div>
+    <script>
+        let notificationInterval;
+    
+        // Different message options based on notification type
+        const notificationMessages = {
+            "appointments": [
+                "You have an appointment scheduled for tomorrow at 10:00 AM.",
+                "Dr. Smith has updated your appointment details.",
+                "Reminder: Your appointment with Dr. Lee is in 3 hours."
+            ],
+            "prescriptions": [
+                "Your prescription for ibuprofen is ready for pickup.",
+                "A new prescription has been added to your account.",
+                "Time to refill your prescription for blood pressure medication."
+            ],
+            "alerts": [
+                "Health alert: Stay hydrated during the current heatwave.",
+                "New health guideline update: Wear a mask in crowded areas.",
+                "Stay safe! COVID-19 cases have been rising in your area."
+            ]
+        };
+    
+        // Form Validation
+        (function () {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    } else {
+                        event.preventDefault();
+                        saveSettings();
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    
+        // Function to save settings and start notifications
+        function saveSettings() {
+            const frequency = document.getElementById("notificationFrequency").value;
+            const type = document.getElementById("notificationTypes").value;
+            const feedback = document.querySelector(".form-feedback");
+    
+            // Show confirmation toast
+            var toastElement = new bootstrap.Toast(document.getElementById('settingsToast'))
+            toastElement.show();
+    
+            // Show success message
+            feedback.style.display = "block";
+    
+            // Clear any previous intervals
+            if (notificationInterval) clearInterval(notificationInterval);
+    
+            // Set interval based on selected frequency
+            let intervalTime;
+            switch (frequency) {
+                case "instant":
+                    intervalTime = 4000;
+                    break;
+                case "daily":
+                    intervalTime = 15000;
+                    break;
+                case "weekly":
+                    intervalTime = 15000;
+                    break;
+                default:
+                    intervalTime = 4000;
+            }
+    
+            // Start sending notifications at the selected frequency
+            notificationInterval = setInterval(() => {
+                displayNotification(type);
+            }, intervalTime);
+        }
+    
+        // Function to display notifications with random message
+        function displayNotification(type) {
+            const messages = notificationMessages[type];
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+    
+            const notificationItems = document.getElementById("notificationItems");
+            const newNotification = document.createElement("li");
+            newNotification.classList.add("list-group-item", `notification-${type}`);
+            newNotification.textContent = randomMessage;
+            notificationItems.prepend(newNotification);
+        }
+        document.getElementById('logoutButton').addEventListener('click', function() {
+                window.close(); 
+                window.opener.location.href = 'login.html'; 
+            });
+    </script>    
+      </body>
+      </html>

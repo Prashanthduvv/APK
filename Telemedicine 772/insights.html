@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Tutoring Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+    integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+    integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    
+    <style>
+        .my{
+            color: rgb(91, 202, 221);
+        }
+        /* body {
+      font-family: 'Arial', sans-serif;
+      background-color: #000000;
+      color: #333;
+      margin-top: 20px;
+    } */
+    .container {
+      max-width: 900px;
+    }
+    .section-card {
+      background-color: rgba(16, 82, 94, 0.849);
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-size: 1.6em;
+      color: #f9fcff;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    .btn-custom {
+        background-color:rgb(35, 71, 71);
+    color: #64a6b6;
+    border: 2px solid white;
+    }
+    .btn-custom:hover {
+        background-color:rgb(23, 65, 65);
+    color: #f3ecec;
+    border: 2px solid rgb(149, 191, 216);
+    }
+    .chart-container, .import-export-buttons {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    select, input {
+      background-color: #e0d5d5;
+      border: 1px solid #ced4da;
+      color: #333;
+    }
+    .navbar-dark .navbar-nav .nav-link {
+    color: rgba(19, 19, 19, 0.911);
+}
+
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="images/logo.png" alt="">
+              </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="index.html">𝐇𝐨𝐦𝐞</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="profile.html">𝐏𝐫𝐨𝐟𝐢𝐥𝐞</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="booking.html">𝐁𝐨𝐨𝐤𝐢𝐧𝐠</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="TeleVisit.html">𝐓𝐞𝐥𝐞𝐕𝐢𝐬𝐢𝐭</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="Notifications.html">𝐍𝐨𝐭𝐢𝐟𝐢𝐜𝐚𝐭𝐢𝐨𝐧𝐬</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="insights.html">𝐇𝐞𝐚𝐥𝐭𝐡 𝐈𝐧𝐬𝐢𝐠𝐡𝐭𝐬</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="Help.html">𝐇𝐞𝐥𝐩</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="login.html" id="logoutButton">𝐋𝐨𝐠𝐨𝐮𝐭</a>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+        <!-- Data Visualization Section -->
+        <div class="card section-card">
+          <h2 class="section-title">Data Visualization</h2>
+          <p class="my">Display health metrics, appointment schedules, and medical records through interactive charts and graphs.</p>
+          <form id="visualizationForm" onsubmit="return handleSubmit(event)">
+            <label for="timeFrame" class="my">Select Time Frame:</label>
+            <select id="timeFrame" class="form-control" required>
+              <option value="">Choose...</option>
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+            </select>
+            
+            <label for="dataPoints" class="my">Data Points:</label>
+            <input type="text" id="dataPoints" class="form-control" placeholder="Enter data points (e.g., heart rate, steps)" required>
+            
+            <button type="submit" class="btn btn-custom mt-3">Submit</button>
+          </form>
+        </div>
+    
+        <!-- Display Submitted Data Section -->
+        <div class="table-container section-card">
+          <h2 class="section-title">Submitted Data</h2>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Time Frame</th>
+                <th>Data Points</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="dataDisplayTable"></tbody>
+          </table>
+        </div>
+      
+        <!-- Data Synchronization Section -->
+        <div class="card section-card">
+          <h2 class="section-title">Data Synchronization</h2>
+          <p class="my">Implement cloud synchronization to keep user data consistent across multiple devices.</p>
+          <form id="syncForm">
+            <div class="form-check">
+              <input type="checkbox" id="manualSync" class="form-check-input" onclick="showChartOrGraph()">
+              <label for="manualSync" class="form-check-label my">Enable Manual Sync</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" id="autoSync" class="form-check-input" onclick="showChartOrGraph()">
+              <label for="autoSync" class="form-check-label my">Enable Automatic Sync</label>
+            </div>
+          </form>
+    
+          <div id="manualChartContainer" class="chart-container">
+            <canvas id="manualChart"></canvas>
+          </div>
+          <div id="autoChartContainer" class="chart-container">
+            <canvas id="autoChart"></canvas>
+          </div>
+          <div id="bothChartContainer" class="chart-container">
+            <canvas id="bothChart"></canvas>
+          </div>
+        </div>
+    
+        <!-- Integration with Health Devices Section -->
+        <div class="card section-card">
+          <h2 class="section-title">Integration with Health Devices</h2>
+          <p class="my">Support synchronization with various health devices such as smartwatches, fitness trackers, and medical sensors.</p>
+          <form id="deviceIntegrationForm" onsubmit="return validateDeviceIntegration()">
+            <label for="deviceType" class="my">Select Device Type:</label>
+            <select id="deviceType" class="form-control" onchange="toggleImportExport()" required>
+              <option value="">Choose...</option>
+              <option value="smartwatch">Smartwatch</option>
+              <option value="fitness-tracker">Fitness Tracker</option>
+              <option value="medical-sensor">Medical Sensor</option>
+            </select>
+            
+            <div id="importExport" class="import-export-buttons">
+              <p>After import the files the export button will be enabled!</p>
+                <button type="button" onclick="openImportModal()" class="btn btn-success">Import Data</button>
+                <button type="button" id="exportButton" class="btn btn-warning" onclick="openExportModal()" disabled>Export Data</button>
+              </div>
+          </form>
+        </div>
+     
+    
+       <!-- Import Modal -->
+       <div class="modal fade " id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center text-dark" id="importModalLabel">Import Data</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                <!-- <span aria-hidden="true" class="close">&times;</span> -->
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Please ensure seamless data import between your selected device and the app. Make sure the file format is supported all files.</p>
+              <input type="file" id="importFiles" multiple style="display:none;" />
+              <button type="button" class="btn btn-primary" onclick="document.getElementById('importFiles').click()">Select Files to Import</button>
+              <div id="selectedImportFiles" class="mt-3"></div>
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class=" btn btn-secondary" data-dismiss="modal">Close</button> -->
+              <button type="button" class="btn btn-success" onclick="confirmImport()">Import Selected Files</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Export Modal -->
+      <div class="modal fade" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="exportModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exportModalLabel">Export Data</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <!-- <span aria-hidden="true" class="btn-close">&times;</span> -->
+              </button>
+            </div>
+            <div class="modal-body">
+              <h6 class=" text-center">Share on Social Media</h6>
+              <div class="social-media-icons">
+                <a href="https://www.facebook.com" target="_blank"><img src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png" alt="Facebook" /></a>
+                <a href="https://www.twitter.com" target="_blank"><img src="https://img.icons8.com/ios-filled/50/000000/twitter-squared.png" alt="Twitter" /></a>
+                <a href="https://www.instagram.com" target="_blank"><img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Instagram" /></a>
+                <a href="https://www.linkedin.com" target="_blank"><img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png" alt="LinkedIn" /></a>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-secondary close" data-dismiss="modal">Close</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    </div>
+      <!-- JavaScript for Validations and Actions -->
+      <script>
+         function handleSubmit(event) {
+          event.preventDefault();
+          
+          // Get form values
+          const timeFrame = document.getElementById("timeFrame").value;
+          const dataPoints = document.getElementById("dataPoints").value;
+    
+          // Add a new row to the table
+          addDataRow(timeFrame, dataPoints);
+          
+          // Reset form
+          document.getElementById("visualizationForm").reset();
+        }
+    
+        // Function to add a row to the table with edit and delete buttons
+        function addDataRow(timeFrame, dataPoints) {
+          const tableBody = document.getElementById("dataDisplayTable");
+          const row = document.createElement("tr");
+    
+          // Creating cells for time frame, data points, and action buttons
+          row.innerHTML = `
+            <td>${timeFrame}</td>
+            <td>${dataPoints}</td>
+            <td>
+              <button onclick="editData(this)" class="btn btn-warning btn-sm">Edit</button>
+              <button onclick="deleteData(this)" class="btn btn-danger btn-sm">Delete</button>
+            </td>
+          `;
+          
+          tableBody.appendChild(row);
+        }
+    
+        // Function to edit data in a specific row
+        function editData(button) {
+          const row = button.closest("tr");
+          const timeFrameCell = row.cells[0];
+          const dataPointsCell = row.cells[1];
+    
+          // Populate form with current values
+          document.getElementById("timeFrame").value = timeFrameCell.textContent;
+          document.getElementById("dataPoints").value = dataPointsCell.textContent;
+    
+          // Remove the row for updating purposes
+          row.remove();
+        }
+    
+        // Function to delete a row from the table
+        function deleteData(button) {
+          const row = button.closest("tr");
+          row.remove();
+        }
+        function validateVisualization() {
+          const timeFrame = document.getElementById("timeFrame").value;
+          const dataPoints = document.getElementById("dataPoints").value.trim();
+          
+          if (!timeFrame || !dataPoints) {
+            alert("Please select a time frame and enter data points.");
+            return false;
+          }
+          alert("Data Visualization settings saved successfully!");
+          return true;
+        }
+    
+        function showChartOrGraph() {
+          const manualSync = document.getElementById("manualSync").checked;
+          const autoSync = document.getElementById("autoSync").checked;
+    
+          document.getElementById("manualChartContainer").style.display = "none";
+          document.getElementById("autoChartContainer").style.display = "none";
+          document.getElementById("bothChartContainer").style.display = "none";
+    
+          if (manualSync && autoSync) {
+            displayChart("bothChart", "line");
+          } else if (manualSync) {
+            displayChart("manualChart", "bar");
+          } else if (autoSync) {
+            displayChart("autoChart", "pie");
+          } else {
+            alert("Please select at least one sync option.");
+          }
+        }
+    
+        function displayChart(chartId, chartType) {
+          const chartContainer = document.getElementById(chartId + "Container");
+          chartContainer.style.display = "block";
+          const ctx = document.getElementById(chartId).getContext("2d");
+          new Chart(ctx, {
+            type: chartType,
+            data: {
+              labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+              datasets: [{
+                label: "Health Data",
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: ["#007bff", "#28a745", "#ffc107", "#dc3545", "#17a2b8", "#6610f2"],
+                borderWidth: 1,
+              }]
+            }
+          });
+        }
+    
+        function validateDeviceIntegration() {
+          const deviceType = document.getElementById("deviceType").value;
+          if (!deviceType) {
+            alert("Please select a device type.");
+            return false;
+          }
+          alert("Device Integration settings saved successfully!");
+          return true;
+        }
+    
+        function toggleImportExport() {
+          const deviceType = document.getElementById("deviceType").value;
+          const importExportDiv = document.getElementById("importExport");
+          importExportDiv.style.display = deviceType ? "block" : "none";
+        }
+        function toggleImportExport() {
+          const deviceType = document.getElementById("deviceType").value;
+          const importExportDiv = document.getElementById("importExport");
+          importExportDiv.style.display = deviceType ? "block" : "none";
+        }
+    
+        function openImportModal() {
+          $('#importModal').modal('show');
+        }
+    
+        function openExportModal() {
+          $('#exportModal').modal('show');
+        }
+    
+        function confirmImport() {
+          const files = document.getElementById('importFiles').files;
+          if (files.length > 0) {
+            displaySelectedFiles(files, 'Import');
+            document.getElementById("exportButton").disabled = false; // Enable export button
+            $('#importModal').modal('hide');
+          } else {
+            alert("No files selected for import.");
+          }
+        }
+    
+        function displaySelectedFiles(files, action) {
+          const selectedFilesDiv = document.getElementById("selectedImportFiles");
+          selectedFilesDiv.innerHTML = `<strong>Selected files for ${action}:</strong><br>`;
+          for (let i = 0; i < files.length; i++) {
+            selectedFilesDiv.innerHTML += `- ${files[i].name}<br>`;
+          }
+        }
+    
+        
+    
+        // Trigger file input
+        document.addEventListener('DOMContentLoaded', function() {
+          const importFilesInput = document.getElementById('importFiles');
+          importFilesInput.addEventListener('change', function() {
+            displaySelectedFiles(this.files, 'Import');
+          });
+        });
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            window.close(); 
+            window.opener.location.href = 'login.html'; 
+        });
+      </script>
+      </body>
+      </html>

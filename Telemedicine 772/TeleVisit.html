@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Tutoring Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+    integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+    integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .my{
+            color: rgb(91, 202, 221);
+        }
+        /* body {
+      font-family: 'Arial', sans-serif;
+      background-color: #000000;
+      color: #333;
+      margin-top: 20px;
+    } */
+    .container {
+      max-width: 900px;
+    }
+    .section-card {
+      background-color: rgba(16, 82, 94, 0.849);
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-size: 1.6em;
+      color: #f9fcff;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    .btn-custom {
+        background-color:rgb(35, 71, 71);
+    color: #64a6b6;
+    border: 2px solid white;
+    }
+    .btn-custom:hover {
+        background-color:rgb(23, 65, 65);
+    color: #f3ecec;
+    border: 2px solid rgb(149, 191, 216);
+    }
+    .chart-container, .import-export-buttons {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    select, input {
+      background-color: #e0d5d5;
+      border: 1px solid #ced4da;
+      color: #333;
+    }
+    .navbar-dark .navbar-nav .nav-link {
+    color: rgba(19, 19, 19, 0.911);
+}
+
+    </style>   <style>
+        .my{
+            color: rgb(44,174,196);
+        }
+          /* Custom CSS to display video containers side by side */
+          .video-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        video {
+            width: 48%; /* Adjusting width for better spacing */
+            height: auto;
+            border: 1px solid black;
+        }
+        .box{
+            border: 3px solid rgb(244, 250, 252);
+            border-radius: 20px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.527);
+        }
+        .btn{
+    background-color:rgb(35, 71, 71);
+    color: #64a6b6;
+    border: 2px solid white;
+    box-shadow: 0px 0px 2px 2px  rgba(72, 255, 0, 0.603); 
+}
+.btn1{
+    background-color:rgb(35, 71, 71);
+    color: #64a6b6;
+    border: 2px solid white;
+    box-shadow: 0px 0px 2px 2px rgba(199, 28, 28, 0.651);  
+}
+.btn2{
+    background-color:rgb(35, 71, 71);
+    color: #64a6b6;
+    border: 2px solid white;
+    box-shadow: 0px 0px 2px 2px rgba(255, 230, 0, 0.603);  
+}
+.btn3{
+    background-color:rgb(35, 71, 71);
+    color: #64a6b6;
+    border: 2px solid white;
+    box-shadow: 0px 0px 2px 2px rgba(0, 255, 157, 0.603);  
+}
+.btn4{
+    background-color:rgb(35, 71, 71);
+    color: #64a6b6;
+    border: 2px solid white;
+    box-shadow: 0px 0px 2px 2px rgba(199, 28, 28, 0.651);  
+}
+
+.btn:hover{
+    background-color:rgb(23, 65, 65);
+    color: #f3ecec;
+    border: 2px solid rgb(149, 191, 216);
+}
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="images/logo.png" alt="">
+              </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="index.html">𝐇𝐨𝐦𝐞</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="profile.html">𝐏𝐫𝐨𝐟𝐢𝐥𝐞</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="booking.html">𝐁𝐨𝐨𝐤𝐢𝐧𝐠</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="TeleVisit.html">𝐓𝐞𝐥𝐞𝐕𝐢𝐬𝐢𝐭</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="Notifications.html">𝐍𝐨𝐭𝐢𝐟𝐢𝐜𝐚𝐭𝐢𝐨𝐧𝐬</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="insights.html">𝐇𝐞𝐚𝐥𝐭𝐡 𝐈𝐧𝐬𝐢𝐠𝐡𝐭𝐬</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="Help.html">𝐇𝐞𝐥𝐩</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="login.html" id="logoutButton">𝐋𝐨𝐠𝐨𝐮𝐭</a>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </nav>
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <div class="container mt-5 box  mb-4">
+        <h2 class="text-center text-white"><b>Secure Video Conferencing</b></h2>
+
+        <!-- Video Section -->
+        <div class="video-container mt-5">
+            <video id="localVideo" autoplay muted></video>
+            <video id="remoteVideo" autoplay></video>
+        </div>
+
+        <!-- Controls for Video Call -->
+        <div class="controls mb-3 text-center">
+            <button id="startCall" class="btn  m-3">Start Call</button>
+            <button id="endCall" class="btn btn1 m-3">End Call</button>
+            <button id="shareScreen" class="btn btn3 m-3">Share Screen</button>
+            <button id="startRecording" class="btn btn2 m-3">Start Recording</button>
+            <button id="stopRecording" class="btn btn-secondary  btn4 m-3" disabled>Stop Recording</button>
+        </div>
+
+        <!-- Chat Section -->
+        <div class="form-group text-white mt-4 text-center">
+            <label for="chatBox"><h4><b>Chat :</b></h4></label>
+            <textarea id="chatBox" class="form-control mt-2" rows="4" placeholder="Type your message..."></textarea>
+            <div class="text-center">
+                <button id="sendMessage" class="btn btn-success mt-2">Send</button>
+            </div>
+           
+        </div>
+
+        <!-- Display Chat -->
+        <div class="mt-3">
+            <h4 class="text-center text-white"><b>Messages</b></h4>
+            <ul id="chatMessages" class="list-group"></ul>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Getting DOM elements
+        const startCallButton = document.getElementById('startCall');
+        const endCallButton = document.getElementById('endCall');
+        const shareScreenButton = document.getElementById('shareScreen');
+        const startRecordingButton = document.getElementById('startRecording');
+        const stopRecordingButton = document.getElementById('stopRecording');
+        const chatBox = document.getElementById('chatBox');
+        const sendMessageButton = document.getElementById('sendMessage');
+        const chatMessages = document.getElementById('chatMessages');
+
+        // Variables to manage video stream and recording
+        let localStream;
+        let remoteStream;
+        let isCallActive = false;
+        let mediaRecorder;
+        let recordedChunks = [];
+
+        // Start Call Functionality
+        startCallButton.addEventListener('click', async () => {
+            try {
+                localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                document.getElementById('localVideo').srcObject = localStream;
+
+                // Simulating remote stream with localStream
+                remoteStream = localStream;
+                document.getElementById('remoteVideo').srcObject = remoteStream;
+
+                isCallActive = true;
+                console.log('Call started');
+            } catch (error) {
+                console.error('Error starting the call:', error);
+                alert('Unable to start the call. Please check your camera/microphone permissions.');
+            }
+        });
+
+        // End Call Functionality
+        endCallButton.addEventListener('click', () => {
+            if (isCallActive) {
+                localStream.getTracks().forEach(track => track.stop());
+                document.getElementById('localVideo').srcObject = null;
+                document.getElementById('remoteVideo').srcObject = null;
+                isCallActive = false;
+                console.log('Call ended');
+            } else {
+                alert('No active call to end.');
+            }
+        });
+
+        // Share Screen Functionality
+        shareScreenButton.addEventListener('click', async () => {
+            if (isCallActive) {
+                try {
+                    const screenStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+                    document.getElementById('localVideo').srcObject = screenStream;
+                    screenStream.getTracks().forEach(track => {
+                        localStream.addTrack(track);
+                    });
+                    console.log('Screen sharing started');
+                } catch (error) {
+                    console.error('Error sharing screen:', error);
+                    alert('Unable to share screen. Please check your permissions.');
+                }
+            } else {
+                alert('Please start a call first.');
+            }
+        });
+
+        // Start Recording Functionality
+        startRecordingButton.addEventListener('click', () => {
+            if (isCallActive && localStream) {
+                recordedChunks = [];
+                mediaRecorder = new MediaRecorder(localStream);
+
+                mediaRecorder.ondataavailable = event => {
+                    if (event.data.size > 0) {
+                        recordedChunks.push(event.data);
+                    }
+                };
+
+                mediaRecorder.onstop = () => {
+                    const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'recording.webm';
+                    a.innerText = 'Download Recording';
+                    document.body.appendChild(a);
+                    a.click(); // Automatically trigger download
+                    document.body.removeChild(a);
+                };
+
+                mediaRecorder.start();
+                startRecordingButton.disabled = true; // Disable start button while recording
+                stopRecordingButton.disabled = false; // Enable stop button
+                console.log('Recording started');
+            } else {
+                alert('Please start a call first.');
+            }
+        });
+
+        // Stop Recording Functionality
+        stopRecordingButton.addEventListener('click', () => {
+            if (mediaRecorder && mediaRecorder.state === 'recording') {
+                mediaRecorder.stop();
+                console.log('Recording stopped');
+                startRecordingButton.disabled = false; // Enable start button
+                stopRecordingButton.disabled = true; // Disable stop button
+            } else {
+                alert('No recording is in progress.');
+            }
+        });
+
+        // Chat Functionality
+        sendMessageButton.addEventListener('click', () => {
+            const messageText = chatBox.value.trim();
+            if (messageText) {
+                const listItem = document.createElement('li');
+                listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+                listItem.innerHTML = `
+                    ${messageText}
+                    <div>
+                        <button class="btn btn3 btn-sm  btn-warning edit-button">Edit</button>
+                        <button class="btn btn1 btn-sm btn-danger delete-button">Delete</button>
+                    </div>
+                `;
+                chatMessages.appendChild(listItem);
+                chatBox.value = ''; // Clear chat box
+
+                // Edit and Delete Button Functionality
+                listItem.querySelector('.edit-button').addEventListener('click', () => {
+                    chatBox.value = messageText; // Populate chat box with the current message
+                    chatMessages.removeChild(listItem); // Remove the original message
+                });
+
+                listItem.querySelector('.delete-button').addEventListener('click', () => {
+                    chatMessages.removeChild(listItem); // Remove the message
+                });
+            } else {
+                alert('Please enter a message.');
+            }
+        });
+
+        // Logout Functionality
+        document.getElementById('logoutButton').addEventListener('click', () => {
+            alert('Logging out...'); // Simulate logout
+            // Add actual logout logic here
+        });
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            window.close(); 
+            window.opener.location.href = 'login.html'; 
+        });
+    </script>
+      </body>
+      </html>

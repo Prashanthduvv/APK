@@ -1,0 +1,97 @@
+.navbar-brand {
+    margin-right: 0;
+  }
+  .navbar-brand img {
+    width: 80px;
+  }
+  @media screen and (min-width: 768px) {
+    .navbar-brand img {
+      width: 100px;
+    }
+    .navbar .container-fluid {
+      flex-direction: column;
+    }
+    .navbar .navbar-nav .nav-item {
+      padding: 0.5em 1em;
+    }
+    .navbar-nav {
+      border-bottom: 2px solid #111010;
+    }
+  }
+  .navbar .navbar-nav .nav-link {
+    color: #0a0909;
+    font-size: 1.5rem;
+    /* font-style:italic; */
+    font-weight: 400;
+  }
+  .navbar .navbar-nav {
+    border-top: 2px solid #080808;
+    margin-top: 0.5em;
+  }
+  body {
+    background-image: url('https://img.freepik.com/premium-photo/top-view-world-health-day-banner-design-stethoscope-miniature-earth-blue-background_358001-6851.jpg'); /* Background image URL */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    color: #f8f4f4; /* General text color */
+}
+/* Footer Section */
+.footer {
+    padding: 40px 0;
+    font-family: Arial, sans-serif;
+    color: #f3f0ebde;
+background-color: rgba(0, 0, 0, 0.603)
+}
+
+.footer-section h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.footer-section p,
+.footer-section a {
+    font-size: 0.9rem;
+    color: #f7f3ea;
+}
+
+.footer-section a:hover {
+    color: #5e5d5b; /* Hover effect for links */
+    text-decoration: underline;
+}
+
+/* Social Media Icons */
+.social-icon {
+    font-size: 1.5rem;
+    color: #f1ede4;
+}
+
+.footer-bottom {
+    border-top: 1px solid #f3f0ea00;
+    padding-top: 1rem;
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .footer-content {
+        text-align: center;
+    }
+    .footer-section {
+        margin-bottom: 1.5rem;
+    }
+    .social-icon {
+        margin-bottom: 0.5rem;
+    }
+}
+.btn{
+    background-color:rgb(35, 71, 71);
+    color: #64a6b6;
+    border: 2px solid white;
+}
+.btn:hover{
+    background-color:rgb(23, 65, 65);
+    color: #f3ecec;
+    border: 2px solid rgb(149, 191, 216);
+}

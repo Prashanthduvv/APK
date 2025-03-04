@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Login Page</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/premium-photo/stethoscope-pills-bottle-pills-blue-background-with-copy-space_358001-53021.jpg');
+            background-repeat: no-repeat;
+            background-size: cover; 
+            backdrop-filter: blur(3px); 
+        }
+
+        .card {
+            border-radius: 12px; /* Rounded corners */
+            background: rgba(12, 12, 12, 0.514); /* Semi-transparent white background */
+            backdrop-filter: blur(4px); /* Optional: adds a blur effect to the background */
+            border: 2px solid rgba(215, 249, 253, 0.993); /* Light border for contrast */
+        }
+
+        .invalid-feedback {
+            display: none;
+        }
+
+        .is-invalid ~ .invalid-feedback {
+            display: block;
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        @media (max-width: 576px) {
+            .card {
+                width: 90%;
+            }
+        }
+    </style>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card p-4 shadow-lg" style="width: 100%; max-width: 400px;">
+            <h2 class="text-center text-white"><b>Login</b></h2>
+            <form id="loginForm">
+                <div class="form-group text-white">
+                    <label for="username">Email address</label>
+                    <input type="email" class="form-control" id="username" placeholder="Enter email" required>
+                    <div class="invalid-feedback">
+                        Please enter a valid email address.
+                    </div>
+                </div>
+                <div class="form-group text-white">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+                    <div class="invalid-feedback">
+                        Password must be 8-12 characters long, start with a capital letter, and include at least one special character and one number.
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+            <div class="form-section mt-3 text-center text-white">
+                <p>Create an account? <a href="singup.html">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('loginForm');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+    
+            // Regular expressions for validation
+            const usernamePattern = /^[A-Za-z0-9._%+-]+@[A-Za-z]+\.[A-Za-z]{2,}$/; // Email validation pattern
+            const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
+    
+            function validateUsername() {
+                const username = usernameInput.value.trim();
+                const usernameValid = usernamePattern.test(username);
+                usernameInput.classList.toggle('is-invalid', !usernameValid);
+            }
+    
+            function validatePassword() {
+                const password = passwordInput.value.trim();
+                const passwordValid = passwordPattern.test(password);
+                passwordInput.classList.toggle('is-invalid', !passwordValid);
+            }
+    
+            usernameInput.addEventListener('blur', validateUsername);
+            passwordInput.addEventListener('blur', validatePassword);
+    
+            form.addEventListener('submit', (event) => {
+                event.preventDefault(); // Prevent form from submitting the traditional way
+    
+                // Perform final validation
+                validateUsername();
+                validatePassword();
+    
+                const usernameValid = usernamePattern.test(usernameInput.value.trim());
+                const passwordValid = passwordPattern.test(passwordInput.value.trim());
+    
+                if (usernameValid && passwordValid) {
+                    // Directly redirect to another page
+                    const newTab = window.open('index.html', '_blank');
+                newTab.focus();
+
+                }
+            });
+    
+            // Remove invalid class on input event for live validation feedback
+            usernameInput.addEventListener('input', () => {
+                usernameInput.classList.remove('is-invalid');
+            });
+    
+            passwordInput.addEventListener('input', () => {
+                passwordInput.classList.remove('is-invalid');
+            });
+        });
+    </script>
+    
+</body>
+</html>
