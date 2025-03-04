@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,maximum-scale=1.0">
+    <title>Sign Up</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+        integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+        integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/premium-photo/abstract-electric-guitar-beautiful-floral-background_5095-4354.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            backdrop-filter: blur(3px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            max-width: 500px;
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(39, 91, 95, 0.753);
+            background: rgba(12, 12, 12, 0.514);
+            border: 2px solid  #a9a1a6;;
+        }
+
+        .card-header {
+            color: rgb(255, 255, 255);
+            text-align: center;
+            font-size: 1.5rem;
+            border-radius: 15px 15px 0 0;
+            padding: 20px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 5px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+        }
+
+        .input::placeholder {
+            color: #6c757d;
+        }
+
+        .mandatory::after {
+            content: "*";
+            color: red;
+            font-size: 0.9rem;
+            margin-left: 5px;
+        }
+
+        .gender-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .gender-container label {
+            margin-left: 5px;
+        }
+
+        .gender-container input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #f46e13;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background-color: #000000;
+        }
+
+        .form-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-section p {
+            margin: 0;
+        }
+
+        .form-section a {
+            color: rgb(88, 139, 206);
+            text-decoration: none;
+        }
+
+        .form-section a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: rgb(255, 255, 255);
+            font-size: 0.9rem;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+        .my {
+    color: #f46e13;
+    font-family: "Times New Roman", Times, serif;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-header text-white">
+            <b class="my">Sign Up</b>
+        </div>
+        <div class="card-body text-white">
+            <form id="signupForm" class="form">
+                <div class="form-container">
+                    <label for="fullName" class="mandatory my">Full Name</label>
+                    <input type="text" pattern="[A-Za-z ]+" oninput="this.value = this.value.replace(/[^A-Za-z ]/g, '')" required id="fullName" class="input" placeholder="full name">
+                    <div id="fullNameError" class="error-message"></div>
+                </div>
+                <div class="form-container">
+                    <label for="email" class="mandatory my">Email</label>
+                    <input type="email" id="email" class="input" placeholder="Email" required>
+                    <div id="emailError" class="error-message"></div>
+                </div>
+                <div class="form-container">
+                    <label for="password" class="mandatory my">Password</label>
+                    <input type="password" id="password" class="input" placeholder="Password" required>
+                    <div id="passwordError" class="error-message"></div>
+                </div>
+                <div class="form-container">
+                    <label for="phone" class="mandatory my">Phone Number</label>
+                    <input type="number" id="phone" class="input" placeholder="Phone Number" maxlength="10"  oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                    <div id="phoneError" class="error-message"></div>
+                </div>
+                <button type="submit">Sign Up</button>
+                <div class="form-section">
+                    <p>Have an account? <a href="login.html">Log in</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Clear previous errors
+            document.getElementById('fullNameError').textContent = '';
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('passwordError').textContent = '';
+            document.getElementById('phoneError').textContent = '';
+
+            // Get form values
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const phone = document.getElementById('phone').value.trim();
+
+            // Validation variables
+            let valid = true;
+
+            // Full Name Validation
+            if (!/^[A-Z][a-zA-Z\s]{3,}$/.test(fullName)) {
+    if (!/^[A-Z]/.test(fullName)) {
+        document.getElementById('fullNameError').textContent = 'The first letter must be capitalized.';
+    } else if (/[^a-zA-Z\s]/.test(fullName)) {
+        document.getElementById('fullNameError').textContent = 'Only letters and spaces are allowed.';
+    } else {
+        document.getElementById('fullNameError').textContent = 'The name must be at least 4 characters long.';
+    }
+    valid = false;
+}
+
+            // Email Validation
+            if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z]{2,}\.[a-zA-Z]{2,}$/.test(email)) {
+                document.getElementById('emailError').textContent = 'Invalid email format.(abc@aa.cc)';
+                valid = false;
+            }
+
+            // Phone Number Validation
+            if (!/^[6-9]\d{9}$/.test(phone)) {
+                document.getElementById('phoneError').textContent = 'Must be 10 digits long, starting with 6, 7, 8, or 9.';
+                valid = false;
+            }
+
+            // Password Validation
+            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
+            if (!passwordRegex.test(password)) {
+                document.getElementById('passwordError').textContent = 'Password must be 8-12 characters long and include at least one uppercase letter, one number, and one special character.';
+                valid = false;
+            }
+
+            // If all validations pass
+            if (valid) {
+                // Show alert message
+                alert('You have signed up successfully! Click OK to go to the login page.');
+                // Redirect to login page
+                window.location.href = 'login.html'; // Change to your desired login page
+            }
+        });
+    </script>
+</body>
+
+</html>

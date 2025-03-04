@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bike Dealership Booking & Checkout</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+    
+      background-color: rgba(60, 53, 53, 0.682);
+      color: #f8c471; 
+      font-family: Arial, sans-serif;
+      background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-image: url('https://static.vecteezy.com/system/resources/previews/027/533/480/non_2x/car-or-bike-smokie-background-realistic-ai-generative-free-photo.jpg');
+          
+    }
+    .container {
+      /* background: white; */
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      margin-top: 50px;
+    }
+    .card { 
+      margin-bottom: 20px; 
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.02);
+    }
+    .error { color: red; font-size: 12px; }
+    .hidden { display: none; }
+    .btn-primary, .btn-success {
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .btn-primary:hover, .btn-success:hover {
+      background-color: rgba(0, 123, 255, 0.9);
+      color: white;
+    }
+    .secure-checkout { color: green; }
+    .alert { margin-top: 10px; }
+    .success-message { color: green; font-size: 14px; margin-top: 15px; text-align: center; }
+  </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">BikeWorld</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bike.html">Bike Catalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="booking.html">Online Booking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="notification.html">Notifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Help.html">Help</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="login.html" id="logoutButton">𝐋𝐨𝐠𝐨𝐮𝐭</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+  <div class="container">
+    <h2 class="text-center">Book Your Service or Test Ride</h2>
+
+    <!-- Appointment Form -->
+    <form id="bookingForm">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="name" class="form-label">Full Name</label>
+          <input type="text" class="form-control" pattern="[A-Za-z\s]+" id="name" placeholder="Enter your name" required>
+        </div>
+        <div class="col-md-6">
+          <label for="phone" class="form-label">Phone Number</label>
+          <input type="tel" class="form-control" pattern="^[6789][0-9]{9}$" id="phone"  placeholder="Enter 10 digit phone number" required>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="serviceType" class="form-label">Service Type</label>
+          <select id="serviceType" class="form-select" required>
+            <option value="">Select Service</option>
+            <option value="testRide">Test Ride</option>
+            <option value="maintenance">Maintenance</option>
+            <option value="service">Service Booking</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="date" class="form-label">Preferred Date</label>
+          <input type="date" class="form-control" id="date" min="" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Submit Booking</button>
+    </form>
+
+    <!-- Order Summary and Payment Section -->
+    <div class="order-summary mt-5 hidden" id="orderSummary">
+      <h3>Order Summary</h3>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Bike Service</h5>
+          <p class="card-text">Service: <strong id="selectedService"></strong></p>
+          <p class="card-text">Scheduled on: <strong id="orderDate"></strong>.</p>
+          <p>Total Amount: <strong>$100</strong></p>
+        </div>
+      </div>
+
+      <!-- Payment Section -->
+      <div class="mt-4">
+        <h4>Choose Payment Method</h4>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="credit" required>
+          <label class="form-check-label" for="creditCard">Credit/Debit Card</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="paymentMethod" id="digitalWallet" value="wallet" required>
+          <label class="form-check-label" for="digitalWallet">Digital Wallet</label>
+        </div>
+      </div>
+
+      <button id="checkoutBtn" class="btn btn-success w-100 mt-4">Proceed to Checkout</button>
+      <p class="text-center mt-3 secure-checkout"><i class="fas fa-lock"></i> PCI DSS Compliant Secure Checkout</p>
+    </div>
+
+    <!-- Secure Checkout Form -->
+    <div class="container hidden" id="secureCheckout">
+      <h2>Secure Checkout</h2>
+      <form id="checkoutForm">
+        <div class="form-group">
+          <label for="cardNumber">Card Number</label>
+          <input type="text" class="form-control" id="cardNumber" required maxlength="16" placeholder="Enter 16-digit card number">
+          <span class="error" id="cardError"></span>
+        </div>
+        <div class="form-group">
+          <label for="expDate">Expiration Date (MM/YY)</label>
+          <input type="text" class="form-control" id="expDate" required placeholder="MM/YY">
+          <span class="error" id="expError"></span>
+        </div>
+        <div class="form-group">
+          <label for="cvv">CVV</label>
+          <input type="number" class="form-control" id="cvv" required max="999" min="100" placeholder="Enter CVV">
+          <span class="error" id="cvvError"></span>
+        </div>
+        <div class="form-group">
+          <label for="billingAddress">Billing Address</label>
+          <input type="text" class="form-control" id="billingAddress" required placeholder="Enter Billing Address">
+          <span class="error" id="addressError"></span>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" class="form-control" id="email" required placeholder="Enter Email Address">
+          <span class="error" id="emailError"></span>
+        </div>
+        <button type="submit" class="btn btn-success w-100">Pay Now</button>
+      </form>
+      <div id="orderSummaryDetails" class="summary hidden">
+        <h3>Order Summary</h3>
+        <p id="summaryDetails"></p>
+      </div>
+      <button id="downloadBtn" class="btn btn-info mt-3 hidden">Download Receipt</button>
+    </div>
+
+    <!-- Real-Time Order Tracking -->
+    <div class="order-status mt-5">
+      <h3>Track Your Order</h3>
+      <div class="alert alert-info" id="orderStatus">Order Status: </div>
+      <div class="alert alert-warning hidden" id="deliveryStatus">Delivery:</div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('checkoutForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+  
+      // Card Number Validation
+      const cardNumber = document.getElementById('cardNumber').value;
+      if (!/^\d{16}$/.test(cardNumber)) {
+        document.getElementById('cardError').innerText = 'Card number must be exactly 16 digits.';
+        return;
+      } else {
+        document.getElementById('cardError').innerText = '';
+      }
+  
+      // Expiration Date Validation
+      const expDate = document.getElementById('expDate').value;
+      const [expMonth, expYear] = expDate.split('/').map(Number);
+      const today = new Date();
+      const currentYear = today.getFullYear() % 100; // Get last two digits of current year
+      const currentMonth = today.getMonth() + 1; // Month is 0-indexed
+      if (isNaN(expMonth) || isNaN(expYear) || expMonth < 1 || expMonth > 12 || expYear < currentYear || expYear > currentYear + 5) {
+        document.getElementById('expError').innerText = 'Invalid expiration date. Must be MM/YY and within the next 5 years.';
+        return;
+      } else {
+        document.getElementById('expError').innerText = '';
+      }
+  
+      // Billing Address Validation
+      const billingAddress = document.getElementById('billingAddress').value;
+      if (!/^[a-zA-Z\s]+$/.test(billingAddress)) {
+        document.getElementById('addressError').innerText = 'Billing address must contain only characters.';
+        return;
+      } else {
+        document.getElementById('addressError').innerText = '';
+      }
+  
+      // Email Address Validation
+      const email = document.getElementById('email').value;
+      const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z-]+\.[A-Za-z]{2,}$/;
+      if (!emailRegex.test(email)) {
+        document.getElementById('emailError').innerText = 'Please enter a valid email address.';
+        return;
+      } else {
+        document.getElementById('emailError').innerText = '';
+      }
+  
+      // If all validations pass, show success message
+      Swal.fire('Payment Successful', 'Your payment has been processed. A receipt will be generated.', 'success')
+        .then(() => {
+          document.getElementById('downloadBtn').classList.remove('hidden');
+        });
+    });
+  
+    // Existing code...
+    // Set the minimum date to tomorrow 
+    const today = new Date();
+    const minDate = new Date(today);
+    minDate.setDate(today.getDate() + 1);
+    document.getElementById('date').setAttribute('min', minDate.toISOString().split('T')[0]);
+  
+    // Form submission validation for booking
+    document.getElementById('bookingForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const serviceType = document.getElementById('serviceType').value;
+      const selectedDate = document.getElementById('date').value;
+  
+      // Show order summary
+      document.getElementById('selectedService').innerText = serviceType.charAt(0).toUpperCase() + serviceType.slice(1);
+      document.getElementById('orderDate').innerText = selectedDate;
+      document.getElementById('orderSummary').classList.remove('hidden');
+    });
+  
+    // Checkout process
+    document.getElementById('checkoutBtn').addEventListener('click', function() {
+      const selectedPayment = document.querySelector('input[name="paymentMethod"]:checked');
+      if (selectedPayment) {
+        document.getElementById('secureCheckout').classList.remove('hidden');
+        document.getElementById('orderSummary').classList.add('hidden');
+      } else {
+        Swal.fire('Error', 'Please select a payment method.', 'error');
+      }
+    });
+  
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const serviceType = document.getElementById('selectedService').innerText;
+      const date = document.getElementById('orderDate').innerText;
+      const totalAmount = "$100"; // You can dynamically update this value if needed.
+  
+      const receiptContent = 
+        `Bike Dealership - Receipt
+        ========================
+        Full Name: ${name}
+        Phone Number: ${phone}
+        Service Type: ${serviceType}
+        Scheduled Date: ${date}
+        Total Amount: ${totalAmount}
+        ========================
+        Thank you for booking with us!
+      `;
+  
+      const blob = new Blob([receiptContent], { type: "text/plain" });
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = 'Receipt.txt';
+      downloadLink.click();
+    });
+  
+    document.getElementById('logoutButton').addEventListener('click', function() {
+                window.close(); 
+                window.opener.location.href = 'login.html'; 
+            });
+  
+  </script>
+  
+    <footer class="bg-dark text-white pt-4 mt-4">
+        <div class="container">
+            <div class="row">
+                <!-- Navigation Links -->
+                <div class="col-md-3">
+                    <h5>Navigation</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white f1">Home</a></li>
+                        <li><a href="bike.html" class="text-white f1">Bike Catalog</a></li>
+                        <li><a href="booking.html" class="text-white f1">Online Booking</a></li>
+                        <li><a href="notification.html" class="text-white f1">Notification</a></li>
+                        <li><a href="dashboard.html" class="text-white f1">Dashboard</a></li>
+                        <li><a href="Help.html" class="text-white f1">Help</a></li>
+                        <li><a href="login.html" class="text-white f1">Logout</a></li>
+                 
+                    
+                      </ul>
+                </div>
+                <div class="col-md-1"></div>
+                <!-- Social Media Icons -->
+                <div class="col-md-3 text-center">
+                    <h5>Follow Us</h5>
+                    <a href="https://www.facebook.com/" class="text-white me-3"><i
+                            class="fab fa-facebook fa-2x"></i></a>
+                    <a href="https://www.twitter.com" class="text-white me-3"><i class="fab fa-twitter fa-2x"></i></a>
+                    <a href="https://www.instagram.com" class="text-white me-3"><i
+                            class="fab fa-instagram fa-2x"></i></a>
+                    <a href="https://www.linkedin.com" class="text-white"><i class="fab fa-linkedin fa-2x"></i></a>
+                </div>
+                <div class="col-md-1"></div>
+                <!-- Contact Information -->
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <p>Email: info@bikedealership.com</p>
+                    <p>Phone: +91 9876543210</p>
+                    <p>Address: Hyderabad,Telangana,India.</p>
+                </div>
+            </div>
+
+            <hr class="bg-white">
+            <div class="row">
+                <div class="col text-center">
+                    <p class="mb-0">&copy; 2024 Bike Dealership. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+
+</body>
+</html>

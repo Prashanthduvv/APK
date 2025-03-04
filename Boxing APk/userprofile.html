@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>User Profile & Notifications</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        
+         body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 80px 20px 20px; 
+        } 
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    /* background: white; */
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+form {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    /* color: white; */
+    border-radius: 8px;
+    background: #1b01016b;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color:white;
+    font-size: 20px;
+    
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    transition: border 0.3s;
+    background-color: #ffffff;
+}
+
+input:focus,
+select:focus {
+    border-color: #0056b3;
+    outline: none;
+}
+
+.profile-card {
+    background-color: #bbdefb; /* Google Material light blue */
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-card button {
+    margin-right: 10px;
+    padding: 8px 16px;
+    background-color: #285f9bbc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.profile-card button:hover {
+    background-color: #b34500;
+}
+
+.profile-info,
+.notification-list {
+    margin-top: 20px;
+}
+
+.notification-item {
+    background-color: #d1ecf1;
+    padding: 12px;
+    border-left: 5px solid #0c5460;
+    border-radius: 4px;
+    margin: 5px 0;
+    color: #0c5460;
+    transition: transform 0.3s;
+}
+
+.notification-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.notification-type {
+    font-weight: bold;
+    color: #155724;
+}
+
+.notification-message {
+    font-size: 14px;
+    color: #333;
+    margin-top: 5px;
+}
+
+.profile-image {
+    display: block;
+    margin: 20px auto;
+    border-radius: 50%;
+    border: 2px solid #007bff;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+
+.profile button {
+    width: 100%;
+    padding: 12px;
+    background-color: #711d39;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.profile button:hover {
+    background-color: #dab140;
+}
+
+a {
+    color: rgb(10, 234, 204);
+}
+
+a:hover {
+    color: #e7f3fe;
+}
+</style> 
+  
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <a class="navbar-brand" href="#">Boxing APK</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"><i class="fa-solid fa-bars" style="color: #ffffff;"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link " href="index.html">Library</a></li>
+                <li class="nav-item"><a class="nav-link active" href="userprofile.html">User Profiles</a></li>
+                <li class="nav-item"><a class="nav-link" href="settings.html">Settings</a></li>
+                <li class="nav-item"><a class="nav-link" id="logoutButton"><i class="fa fa-sign-out"
+                            aria-hidden="true"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container profile">
+        <h1 class="text-white">User Profile</h1>
+        <form id="profileForm">
+            <img id="profileImage" class="profile-image" src="" alt="Profile Image" style="display:none;">
+
+            <label for="profilePicture">Profile Picture:</label>
+            <input type="file" id="profilePicture" accept="image/*" onchange="previewImage(event)">
+           
+            <label for="username">Username:</label>
+            <input type="text" id="username" required pattern="^[A-Za-z0-9_]{3,15}$" title="Username should be 3-15 characters long and contain only letters, numbers, and underscores." placeholder="Enter your username...">
+
+            <label for="favoriteTechniques">Favorite Techniques:</label>
+            <input type="text" id="favoriteTechniques" required pattern="^[A-Za-z, ]{3,50}$" title="Favorite techniques should only contain letters, commas, and spaces." placeholder="Enter your favorite techniques...">
+
+            <label for="trainingGoal">Training Goal:</label>
+            <input type="text" id="trainingGoal" required pattern="^[A-Za-z0-9 ]{5,50}$" title="Training goal should be 5-50 characters long." placeholder="Enter your training goal...">
+
+            <label for="goalPeriod">Goal Time Period:</label>
+            <input type="text" id="goalPeriod" class="goal-period" required pattern="^[0-9]{1,2} (weeks|months)$" title="Goal time period should be a number followed by weeks or months (e.g., 6 weeks)." placeholder="Enter goal time period (e.g., 6 weeks, 3 months)...">
+
+            <label for="trainingFrequency">Training Frequency:</label>
+            <select id="trainingFrequency" required>
+                <option value="">Select Frequency</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="biweekly">Biweekly</option>
+            </select>
+
+            <button type="submit">Save Profile</button>
+        </form>
+
+        <div class="profile-info" id="profileInfo"></div>
+
+        <h1 class="text-white">Notifications</h1>
+        <form id="notificationForm">
+            <label for="notificationText">Notification Text:</label>
+            <input type="text" id="notificationText" required placeholder="Enter notification...">
+
+            <label for="notificationType">Type:</label>
+            <select id="notificationType" required>
+                <option value="">Select Type</option>
+                <option value="tutorial">New Tutorial</option>
+                <option value="reminder">Training Reminder</option>
+                <option value="activity">User Activity</option>
+            </select>
+
+            <button type="submit">Send Notification</button>
+        </form>
+
+        <div id="notificationList" class="notification-list"></div>
+    </div>
+
+    <script>
+        let profiles = []; // Array to store profiles
+        let currentProfileIndex = -1; // To store the index of the profile being edited
+        let isEditing = false; // To check if the user is editing
+
+        document.getElementById('profileForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const favoriteTechniques = document.getElementById('favoriteTechniques').value;
+            const trainingGoal = document.getElementById('trainingGoal').value;
+            const goalPeriod = document.getElementById('goalPeriod').value;
+            const trainingFrequency = document.getElementById('trainingFrequency').value;
+
+            if (!username || !favoriteTechniques || !trainingGoal || !goalPeriod || !trainingFrequency) {
+                Swal.fire('Error', 'Please fill in all fields.', 'error');
+                return;
+            }
+
+            if (isEditing) {
+                // Update the existing profile
+                profiles[currentProfileIndex] = { username, favoriteTechniques, trainingGoal, goalPeriod, trainingFrequency };
+                isEditing = false;
+                currentProfileIndex = -1; // Reset after editing
+            } else {
+                // Add a new profile
+                profiles.push({ username, favoriteTechniques, trainingGoal, goalPeriod, trainingFrequency });
+            }
+
+            resetForm();
+            displayProfiles(); // Re-render the updated profiles
+            Swal.fire('Success', 'Profile saved successfully!', 'success');
+        });
+
+        function displayProfiles() {
+            const profileInfo = document.getElementById('profileInfo');
+            profileInfo.innerHTML = '';
+
+            profiles.forEach((profile, index) => {
+                const profileCard = document.createElement('div');
+                profileCard.className = 'profile-card';
+                profileCard.innerHTML = `
+                    <h5>${profile.username}</h5>
+                    <p><strong>Favorite Techniques:</strong> ${profile.favoriteTechniques}</p>
+                    <p><strong>Training Goal:</strong> ${profile.trainingGoal}</p>
+                    <p><strong>Goal Period:</strong> ${profile.goalPeriod}</p>
+                    <p><strong>Training Frequency:</strong> ${profile.trainingFrequency}</p>
+                    <button onclick="editProfile(${index})" class="mb-3">Edit</button>
+                    <button onclick="deleteProfile(${index})">Delete</button>
+                `;
+                profileInfo.appendChild(profileCard);
+            });
+        }
+
+       // Function to edit the profile with SweetAlert confirmation
+function editProfile(username, favoriteTechniques, trainingGoal, goalPeriod, trainingFrequency) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to edit this profile?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, edit it!',
+        cancelButtonText: 'No, cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            isEditing = true; // Set editing mode
+
+            // Populate form fields with the current profile data
+            document.getElementById('username').value = username;
+            document.getElementById('favoriteTechniques').value = favoriteTechniques;
+            document.getElementById('trainingGoal').value = trainingGoal;
+            document.getElementById('goalPeriod').value = goalPeriod;
+            document.getElementById('trainingFrequency').value = trainingFrequency;
+
+            Swal.fire('Ready to Edit!', 'Make the changes and submit to save.', 'success');
+        } else {
+            Swal.fire('Cancelled', 'Your profile is unchanged.', 'error');
+        }
+    });
+}
+
+
+        function deleteProfile() {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you really want to delete this profile?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, keep it'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('profileInfo').innerHTML = '';
+            resetForm();
+            Swal.fire('Deleted!', 'Your profile has been deleted.', 'success');
+        }
+    });
+}
+        function resetForm() {
+            document.getElementById('profileForm').reset();
+            document.getElementById('profileImage').style.display = 'none';
+        }
+
+        function previewImage(event) {
+            const profileImage = document.getElementById('profileImage');
+            profileImage.src = URL.createObjectURL(event.target.files[0]);
+            profileImage.style.display = 'block';
+        }
+         // Notification management
+         document.getElementById('notificationForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const notificationText = document.getElementById('notificationText').value;
+            const notificationType = document.getElementById('notificationType').value;
+
+            if (!notificationText || !notificationType) {
+                Swal.fire('Error', 'Please fill in all fields.', 'error');
+                return;
+            }
+
+            displayNotification(notificationText, notificationType);
+            resetNotificationForm();
+            Swal.fire('Success', 'Notification sent!', 'success');
+        });
+
+        function displayNotification(notificationText, notificationType) {
+            const notificationItem = `
+            <div class="notification-item">
+                <span class="notification-type">${notificationType}</span>
+                <p class="notification-message">${notificationText}</p>
+            </div>
+            `;
+
+            document.getElementById('notificationList').insertAdjacentHTML('beforeend', notificationItem);
+        }
+
+        function resetNotificationForm() {
+            document.getElementById('notificationForm').reset();
+        }
+
+
+
+        document.getElementById('logoutButton').addEventListener('click', function() {
+                window.close(); 
+                window.opener.location.href = 'login.html'; 
+            });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

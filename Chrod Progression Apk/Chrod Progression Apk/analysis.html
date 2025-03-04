@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chord Progression Analysis Tool</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+      /* General Styles */
+      body {
+        margin: 20px;
+        background-color: #f4f7fa;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #2321214a;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 3px solid lightgray;
+      }
+      h2 {
+        color: #f24d0b;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: #f24d0b;
+      }
+
+      input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+        color: #fbfbfb;
+      }
+
+      div button {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 10px;
+        background-color: #f707c7;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      div button:hover {
+        background-color: #ef7807;
+      }
+
+      #output {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        color: #333;
+        font-size: 1.1rem;
+        min-height: 100px;
+        text-align: center;
+      }
+
+      #musicalStaff {
+        margin-top: 20px;
+        text-align: center;
+        min-height: 150px;
+      }
+
+      /* #songPreview {
+        margin-top: 15px;
+        text-align: center;
+      } */
+
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        .container {
+          padding: 15px;
+        }
+
+        h1 {
+          font-size: 1.5rem;
+        }
+
+        button {
+          font-size: 1rem;
+        }
+
+        #output {
+          font-size: 1rem;
+          padding: 12px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 10px;
+        }
+
+        h1 {
+          font-size: 1.3rem;
+        }
+
+        input[type="file"] {
+          font-size: 0.9rem;
+        }
+
+        button {
+          font-size: 0.9rem;
+          padding: 10px;
+        }
+
+        #output {
+          font-size: 0.9rem;
+          padding: 10px;
+        }
+      }
+      .my {
+        width: 60px;
+      }
+      .p1{
+      color: #e98a45;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <a class="navbar-brand" href="index.html">HarmoniQ</a>
+      <button
+        class="navbar-toggler my"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"
+          ><i class="fa-solid fa-bars" style="color: #ffffff"></i
+        ></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html"
+              ><i class="fas fa-home"></i>Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="analysis.html"
+              ><i class="fas fa-music"></i> Analysis</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="playback.html"
+              ><i class="fas fa-play-circle"></i> Playback</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="community.html"
+              ><i class="fas fa-users"></i> Community</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="reminders.html"
+              ><i class="fas fa-bell"></i> Reminders</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="help.html"
+              ><i class="fas fa-question-circle"></i> Help</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html" id="logoutButton"
+              ><i class="fa fa-sign-out" aria-hidden="true"></i
+            ></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <h1>Chord Progression Analysis Tool</h1>
+      <input type="file" id="audioInput" accept="audio/*" />
+      <button onclick="analyzeChordProgression()">
+       Play/Analyze Chord Progression
+      </button>
+      <div id="songPreview"></div>
+      <h1 class="text-center">(or)</h1>
+
+      <h2>Record Your Voice</h2>
+      <button onclick="startRecording()" id="startRecordingButton">
+        Start Recording
+      </button>
+      <button onclick="stopRecording()" id="stopRecordingButton" disabled>
+        Stop Recording
+      </button>
+      <div
+        class="div"
+        style="
+          display: flex;
+          align-items: center;
+          text-align: center;
+          justify-content: center;
+          padding: 20px;
+        "
+      >
+        <audio id="recordedAudio" controls></audio>
+      </div>
+
+      <button onclick="exportAsPDF()">Export as PDF</button>
+      <!-- <button onclick="exportAsMusicXML()">Export as MusicXML</button> -->
+      <button
+        onclick="resetTool()"
+        style="background-color: #ff0000; color: #fff"
+      >
+        Reset
+      </button>
+
+      <div id="output" style="height: 100px; overflow-y: scroll">
+        Analysis output will appear here.
+      </div>
+
+      <div id="musicalStaff text-center"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/meyda/dist/web/meyda.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vexflow@4.0.0/build/cdn/vexflow-min.js"></script>
+    <script>
+      let detectedChords = [];
+      let undoStack = [];
+      let redoStack = [];
+      let mediaRecorder;
+      let recordedChunks = [];
+      let recordedAudioBlob;
+      let recordedAudioURL;
+      const chordFunctions = {
+        C: "Tonic",
+        "C#": "Tonic",
+        D: "Supertonic",
+        "D#": "Subdominant",
+        E: "Dominant",
+        F: "Subdominant",
+        "F#": "Dominant",
+        G: "Tonic",
+        "G#": "Dominant",
+        A: "Subdominant",
+        "A#": "Dominant",
+        B: "Subdominant",
+      };
+
+      function analyzeChordProgression() {
+        const fileInput = document.getElementById("audioInput");
+        const file = fileInput.files[0];
+        if (!file) {
+          alert("Please select an audio file first.");
+          return;
+        }
+
+        const audioContext = new (window.AudioContext ||
+          window.webkitAudioContext)();
+        const reader = new FileReader();
+
+        reader.onload = async (event) => {
+          const arrayBuffer = event.target.result;
+          const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+          const source = audioContext.createBufferSource();
+          source.buffer = audioBuffer;
+
+          const analyzer = Meyda.createMeydaAnalyzer({
+            audioContext: audioContext,
+            source: source,
+            bufferSize: 512,
+            featureExtractors: ["chroma"],
+            callback: (features) => {
+              const chroma = features.chroma;
+              if (chroma) {
+                const detectedChord = detectChord(chroma);
+                detectedChords.push(detectedChord);
+                updateAnalysisDisplay();
+              }
+            },
+          });
+
+          source.connect(audioContext.destination);
+          source.start();
+          analyzer.start();
+        };
+
+        reader.readAsArrayBuffer(file);
+        // displaySongPreview(file);
+        disableInputsOnAnalyze();
+      }
+
+      function detectChord(chroma) {
+        const chords = [
+          "C",
+          "C#",
+          "D",
+          "D#",
+          "E",
+          "F",
+          "F#",
+          "G",
+          "G#",
+          "A",
+          "A#",
+          "B",
+        ];
+        const maxIndex = chroma.indexOf(Math.max(...chroma));
+        return chords[maxIndex];
+      }
+
+      function updateAnalysisDisplay() {
+        document.getElementById(
+          "output"
+        ).innerText = `Detected Chords: ${detectedChords.join(", ")}`;
+        renderMusicalStaff();
+      }
+
+      function renderMusicalStaff() {
+        const vf = new Vex.Flow.Factory({
+          renderer: { elementId: "musicalStaff" },
+        });
+        const score = vf.EasyScore();
+        const system = vf.System();
+
+        let chordProgression = detectedChords
+          .map((chord) => chord + "7")
+          .join(" ");
+        system.addStave({
+          voices: [score.voice(score.notes(chordProgression))],
+        });
+        vf.draw();
+      }
+
+      function displaySongPreview(file) {
+        const previewDiv = document.getElementById("songPreview");
+        previewDiv.innerHTML = `<p class="p1">Selected Audio: ${file.name}</p>`;
+        const audioElement = document.createElement("audio");
+        audioElement.src = URL.createObjectURL(file);
+        audioElement.controls = true;
+        previewDiv.appendChild(audioElement);
+      }
+
+      function disableInputsOnAnalyze() {
+        document.getElementById("audioInput").disabled = true;
+        document.getElementById("startRecordingButton").disabled = true;
+        document.getElementById("stopRecordingButton").disabled = true;
+      }
+
+      async function startRecording() {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: true,
+        });
+        mediaRecorder = new MediaRecorder(stream);
+
+        mediaRecorder.ondataavailable = (event) => {
+          recordedChunks.push(event.data);
+        };
+
+        mediaRecorder.onstop = () => {
+          recordedAudioBlob = new Blob(recordedChunks, { type: "audio/wav" });
+          recordedAudioURL = URL.createObjectURL(recordedAudioBlob);
+          document.getElementById("recordedAudio").src = recordedAudioURL;
+          recordedChunks = []; // Reset for the next recording
+          analyzeRecordedAudio();
+        };
+
+        mediaRecorder.start();
+        document.getElementById("startRecordingButton").disabled = true;
+        document.getElementById("stopRecordingButton").disabled = false;
+        document.getElementById("audioInput").disabled = true;
+      }
+
+      function stopRecording() {
+        if (mediaRecorder && mediaRecorder.state === "recording") {
+          mediaRecorder.stop();
+        }
+      }
+
+      function analyzeRecordedAudio() {
+        const audioContext = new (window.AudioContext ||
+          window.webkitAudioContext)();
+        const source = audioContext.createBufferSource();
+        const audioElement = document.createElement("audio");
+        audioElement.src = recordedAudioURL;
+
+        audioElement.oncanplaythrough = async () => {
+          const buffer = await audioContext.decodeAudioData(
+            await fetch(audioElement.src).then((res) => res.arrayBuffer())
+          );
+          source.buffer = buffer;
+
+          const analyzer = Meyda.createMeydaAnalyzer({
+            audioContext: audioContext,
+            source: source,
+            bufferSize: 512,
+            featureExtractors: ["chroma"],
+            callback: (features) => {
+              const chroma = features.chroma;
+              if (chroma) {
+                const detectedChord = detectChord(chroma);
+                detectedChords.push(detectedChord);
+                updateAnalysisDisplay();
+              }
+            },
+          });
+
+          source.connect(audioContext.destination);
+          source.start();
+          analyzer.start();
+         
+        };
+      }
+
+      function exportAsPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        let textContent = "Detected Chords:\n" + detectedChords.join(", ");
+
+        doc.text(textContent, 10, 10);
+        doc.save("chord_progression.pdf");
+      }
+
+      function exportAsMusicXML() {
+        if (detectedChords.length === 0) {
+          alert("No chord progression detected to export.");
+          return;
+        }
+
+        let musicXML = `<?xml version="1.0" encoding="UTF-8"?>
+        <score-partwise version="3.1">
+            <part-list>
+                <score-part id="P1">
+                    <part-name>Chord Progression</part-name>
+                </score-part>
+            </part-list>
+            <part id="P1">`;
+
+        detectedChords.forEach((chord) => {
+          musicXML += `
+                <measure>
+                    <note>
+                        <pitch>
+                            <step>${chord.charAt(0)}</step>
+                            <alter>${
+                              chord.length > 1
+                                ? chord.charAt(1) === "#"
+                                  ? 1
+                                  : -1
+                                : 0
+                            }</alter>
+                            <octave>4</octave>
+                        </pitch>
+                        <duration>4</duration>
+                        <type>quarter</type>
+                    </note>
+                </measure>`;
+        });
+
+        musicXML += `
+            </part>
+        </score-partwise>`;
+
+        const blob = new Blob([musicXML], { type: "application/xml" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "chord_progression.musicxml";
+        link.click();
+      }
+
+      function resetTool() {
+        location.reload(); // Refresh the page to reset everything
+      }
+      document
+        .getElementById("logoutButton")
+        .addEventListener("click", function () {
+          window.close();
+          window.opener.location.href = "login.html";
+        });
+    </script>
+  </body>
+</html>

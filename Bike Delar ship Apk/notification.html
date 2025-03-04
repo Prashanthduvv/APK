@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Bike Notifications and Reviews</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+ <style>
+    /* General Enhancements */
+    body {
+        background-image: url('https://static.vecteezy.com/system/resources/previews/027/533/480/non_2x/car-or-bike-smokie-background-realistic-ai-generative-free-photo.jpg');
+          
+      /* background: linear-gradient(135deg, #f5f5f5, #e0e0e0); */
+      font-family: 'Arial', sans-serif;
+      color: #e9e6e8;
+      background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+    }
+    .container {
+      margin-top: 80px;
+    }
+    .form-section {
+      background-color: #ffffff31;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+    .form-section:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    h2 {
+    
+      color: #f8c471; 
+  
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    .btn-primary, .btn-success, .btn-danger, .btn-warning {
+      background-color: #007bff;
+      border: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .btn-primary:hover, .btn-success:hover, .btn-danger:hover, .btn-warning:hover {
+      background-color: #0056b3;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    .error {
+      color: red;
+      font-size: 12px;
+      display: none;
+    }
+    .alert {
+      display: none;
+    }
+    .card {
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background-color: #f9f9f9;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    .card h5 {
+      color: #007bff;
+    }
+    .card p {
+      color: #0a0a0a;
+    }
+    .edit-btn, .delete-btn, .flag-btn {
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand ms-1" href="index.html">BikeWorld</a>
+            <button class="navbar-toggler me-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bike.html">Bike Catalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="booking.html">Online Booking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="notification.html">Notifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Help.html">Help</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="login.html" id="logoutButton">𝐋𝐨𝐠𝐨𝐮𝐭</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<div class="container">
+  <!-- Notification Settings -->
+  <div class="form-section">
+    <h2>Notification Settings</h2>
+    <form id="notification-form">
+      <div class="form-group">
+        <label for="notify-new-bikes">New Bike Arrivals</label>
+        <input type="checkbox" id="notify-new-bikes" name="notify_new_bikes">
+      </div>
+      <div class="form-group">
+        <label for="notify-offers">Promotional Offers</label>
+        <input type="checkbox" id="notify-offers" name="notify_offers">
+      </div>
+      <div class="form-group">
+        <label for="notify-booking">Booking Confirmations</label>
+        <input type="checkbox" id="notify-booking" name="notify_booking">
+      </div>
+      <div class="form-group">
+        <label for="frequency">Notification Frequency</label>
+        <select id="frequency" name="frequency" class="form-control">
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="monthly">Monthly</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Save Settings</button>
+    </form>
+  </div>
+
+  <!-- User Reviews Section -->
+  <div class="form-section">
+    <h2>Submit Your Review</h2>
+    <form id="review-form">
+      <div class="form-group">
+        <label for="bike">Select Bike</label>
+        <select id="bike" name="bike" class="form-control">
+          <option value="mountain">Mountain Bike</option>
+          <option value="road">Road Bike</option>
+          <option value="cruiser">Cruiser</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="rating">Rating (1-5)</label>
+        <input type="number" id="rating" name="rating" min="1" max="5" class="form-control">
+        <div class="error" id="rating-error">Please provide a valid rating between 1 and 5.</div>
+      </div>
+      <div class="form-group">
+        <label for="review">Review</label>
+        <textarea id="review" name="review" rows="4" class="form-control"></textarea>
+        <div class="error" id="review-error">Please enter your review.</div>
+      </div>
+      <button type="submit" class="btn btn-success">Submit Review</button>
+    </form>
+  </div>
+
+  <!-- Reviews Display -->
+  <div class="form-section">
+    <h2>Bike Reviews</h2>
+    <div id="reviews-list">
+      <!-- Reviews will be appended here dynamically -->
+    </div>
+  </div>
+
+  <!-- Moderation Tools -->
+  <div class="form-section">
+    <h2>Moderation Tools</h2>
+    <button class="btn btn-danger" onclick="moderateInappropriateReviews()">Moderate Inappropriate Content</button>
+  </div>
+</div>
+
+<script>
+  const reviews = []; // Store reviews
+  const flaggedReviews = []; // Store flagged reviews
+
+  // Handle Notification Settings Submission with SweetAlert
+  document.getElementById('notification-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+    Swal.fire({
+      icon: 'success',
+      title: 'Settings Saved',
+      text: 'Your notification preferences have been saved!',
+      timer: 2000,
+      showConfirmButton: false
+    });
+  });
+
+  // Handle Review Submission with Validation and SweetAlert
+  document.getElementById('review-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    let rating = document.getElementById('rating').value;
+    let review = document.getElementById('review').value;
+    let isValid = true;
+
+    if (rating < 1 || rating > 5) {
+      document.getElementById('rating-error').style.display = 'block';
+      isValid = false;
+    } else {
+      document.getElementById('rating-error').style.display = 'none';
+    }
+
+    if (review.trim() === '') {
+      document.getElementById('review-error').style.display = 'block';
+      isValid = false;
+    } else {
+      document.getElementById('review-error').style.display = 'none';
+    }
+
+    if (isValid) {
+      // Create review object
+      const reviewObj = { bike: document.getElementById('bike').value, rating, review, flagged: false };
+      reviews.push(reviewObj); // Add to reviews array
+      displayReviews(); // Display updated reviews
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Review Submitted',
+        text: 'Your review has been submitted successfully!',
+        timer: 2000,
+        showConfirmButton: false
+      });
+
+      document.getElementById('review-form').reset();
+    }
+  });
+
+  // Display Reviews with Edit, Delete, and Flag Buttons
+  function displayReviews() {
+    const reviewList = document.getElementById('reviews-list');
+    reviewList.innerHTML = ''; // Clear existing reviews
+
+    reviews.forEach((rev, index) => {
+      const reviewCard = document.createElement('div');
+      reviewCard.className = 'card mb-2';
+      reviewCard.innerHTML = `
+        <div class="card-body">
+          <h5 class="card-title">Bike: ${rev.bike}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Rating: ${rev.rating}</h6>
+          <p class="card-text">${rev.review}</p>
+          <button class="btn btn-warning edit-btn" onclick="editReview(${index})">Edit</button>
+          <button class="btn btn-danger delete-btn" onclick="deleteReview(${index})">Delete</button>
+          <button class="btn btn-secondary flag-btn" onclick="flagReview(${index})">Flag Inappropriate</button>
+        </div>
+      `;
+      reviewList.appendChild(reviewCard);
+    });
+  }
+
+  // Edit Review Functionality
+  function editReview(index) {
+    const rev = reviews[index];
+    document.getElementById('bike').value = rev.bike;
+    document.getElementById('rating').value = rev.rating;
+    document.getElementById('review').value = rev.review;
+
+    deleteReview(index); // Remove the original review
+  }
+
+  // Delete Review Functionality
+  function deleteReview(index) {
+    reviews.splice(index, 1); // Remove review from array
+    displayReviews(); // Refresh displayed reviews
+    Swal.fire({
+      icon: 'info',
+      title: 'Review Deleted',
+      text: 'The review has been deleted successfully!',
+      timer: 2000,
+      showConfirmButton: false
+    });
+  }
+
+  // Flag Review Functionality
+  function flagReview(index) {
+    const rev = reviews[index];
+    rev.flagged = true; // Mark review as flagged
+    flaggedReviews.push(rev); // Add to flagged reviews
+    deleteReview(index); // Remove review from main list
+    Swal.fire({
+      icon: 'warning',
+      title: 'Review Flagged',
+      text: 'This review has been flagged for inappropriate content.',
+      timer: 2000,
+      showConfirmButton: false
+    });
+  }
+
+  // Moderate Inappropriate Content
+  function moderateInappropriateReviews() {
+    if (flaggedReviews.length === 0) {
+      Swal.fire({
+        icon: 'info',
+        title: 'No Flagged Reviews',
+        text: 'There are no flagged reviews at this time.',
+      });
+      return;
+    }
+    
+    let flaggedContent = '';
+    flaggedReviews.forEach((rev, index) => {
+      flaggedContent += `<p><strong>Bike:</strong> ${rev.bike}<br><strong>Rating:</strong> ${rev.rating}<br><strong>Review:</strong> ${rev.review}</p>`;
+    });
+
+    Swal.fire({
+      title: 'Flagged Reviews',
+      html: flaggedContent,
+      showCancelButton: true,
+      confirmButtonText: 'Clear All',
+      cancelButtonText: 'Dismiss',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        flaggedReviews.length = 0; // Clear flagged reviews
+        Swal.fire('Moderation', 'All flagged reviews have been cleared.', 'success');
+      }
+    });
+  }
+  document.getElementById('logoutButton').addEventListener('click', function() {
+                window.close(); 
+                window.opener.location.href = 'login.html'; 
+            });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

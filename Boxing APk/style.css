@@ -1,0 +1,29 @@
+.active{
+    color: rgba(213, 238, 17, 0.769);
+}
+nav a{
+    color:rgb(215, 215, 206);
+    /* margin-right: 150px; */
+}
+nav a:hover{
+    color: rgba(213, 238, 17, 0.769);
+    
+}
+nav{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(86, 13, 47);
+}
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding-top: 70px;
+    /* Add padding to avoid navbar overlap */
+    transition: background-color 0.3s ease;
+      background-image: url("https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?cs=srgb&dl=pexels-suzyhazelwood-1629236.jpg&fm=jpg");
+ background-size: cover;
+ background-attachment: fixed;
+ background-repeat: no-repeat;
+
+}

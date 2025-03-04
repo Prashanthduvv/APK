@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <link rel="stylesheet" href="style.css">
+    <title>Help & Support</title>
+    <style>
+        body {
+            background-image: url('https://static.vecteezy.com/system/resources/previews/027/533/480/non_2x/car-or-bike-smokie-background-realistic-ai-generative-free-photo.jpg');
+            /* background-color: rgba(79, 15, 119, 0.727); */
+            color: rgb(52, 58, 64);
+            font-family: Arial, sans-serif;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: rgb(235, 140, 38);
+
+        }
+
+        .container {
+            margin-top: 120px;
+            max-width: 900px;
+        }
+
+        .card {
+            border: 1px solid rgba(0, 123, 255, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.177);
+            color:rgb(16, 225, 211);
+        }
+
+        .card-header {
+            background-color: rgba(0, 123, 255, 0.2);
+        }
+
+        .card-title {
+            color: rgb(255, 6, 234);
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: rgb(40, 167, 69);
+            border-color: rgb(40, 167, 69);
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: rgb(33, 136, 56);
+        }
+
+        .form-control {
+            border: 1px solid rgb(222, 226, 230);
+            border-radius: 5px;
+        }
+
+        .form-control.valid {
+            border-color: rgb(40, 167, 69);
+        }
+
+        .form-control.invalid {
+            border-color: rgb(220, 53, 69);
+        }
+
+        .form-group label {
+            color: rgb(252, 254, 255);
+        }
+
+        .required:after {
+            content: " *";
+            color: red;
+        }
+
+        .btn-link {
+            color: rgb(255, 255, 255);
+            text-decoration: underline;
+        }
+
+        .btn-link:hover {
+            color: rgb(0, 86, 179);
+        }
+
+        .modal-content {
+            border-radius: 10px;
+            border: 2px solid rgba(212, 0, 255, 0.5);
+            background-color: rgba(255, 255, 255, 0.236);
+        }
+
+        .modal-header {
+            background-color: rgba(0, 123, 255, 0.2);
+        }
+
+        .modal-title {
+            color: rgb(243, 245, 247);
+        }
+
+        .modal-footer .btn {
+            background-color: rgb(40, 167, 69);
+        }
+
+        small.form-text {
+            color: rgb(108, 117, 125);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">BikeWorld</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bike.html">Bike Catalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="booking.html">Online Booking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="notification.html">Notifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Help.html">Help</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html" id="logoutButton">𝐋𝐨𝐠𝐨𝐮𝐭</a>
+                      </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Help & Support</h1>
+
+        <!-- Tutorials Section -->
+        <div id="tutorials" class="mb-5">
+            <h2>Tutorials</h2>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">How to Register</h5>
+                    <p class="card-text">Follow these steps to register on our platform...</p>
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tutorialModal"
+                        data-title="How to Register" data-content="Detailed steps...">View Tutorial</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQs Section -->
+        <div id="faqs" class="mb-5">
+            <h2>FAQs</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="card">
+                    <div class="card-header" id="faqHeadingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#faqCollapseOne" aria-expanded="true" aria-controls="faqCollapseOne">
+                                What is the return policy?
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="faqCollapseOne" class="collapse show" aria-labelledby="faqHeadingOne"
+                        data-parent="#faqAccordion">
+                        <div class="card-body">
+                            You can return your bike within 30 days of purchase.
+                        </div>
+                    </div>
+                </div>
+                <!-- FAQ Item 1 -->
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                                What types of bikes do you offer?
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                        <div class="card-body">
+                            We offer a wide range of bikes, including mountain bikes, road bikes, hybrid bikes, and
+                            electric bikes.
+                        </div>
+                    </div>
+                </div>
+                <!-- FAQ Item 2 -->
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                How can I search for a specific bike?
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                        <div class="card-body">
+                            You can use the search bar on our catalog page to find bikes by name, type, or brand.
+                        </div>
+                    </div>
+                </div>
+                <!-- FAQ Item 3 -->
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Can I test ride a bike before purchasing?
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                        <div class="card-body">
+                            Yes, we encourage you to test ride bikes at our dealership. Please contact us to schedule an
+                            appointment.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Support Section -->
+        <div id="contactSupport" class="mb-5">
+            <h2>Contact Support</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name" class="required" >Name</label>
+                    <input type="text" class="form-control" pattern="[A-Za-z\s]+" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="required">Email</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact" class="required">Contact Number</label>
+                    <input type="text" class="form-control" id="contact" pattern="^[6789][0-9]{9}$"  required maxlength="10">
+                    <small class="form-text text-muted">Contact number should start with 6789 and be 10 digits
+                        long.</small>
+                </div>
+                <div class="form-group">
+                    <label for="message" class="required">Message</label>
+                    <textarea class="form-control" id="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Send Message</button>
+            </form>
+        </div>
+
+        <!-- Feedback Section -->
+        <div id="feedback" class="mb-5">
+            <h2>Feedback</h2>
+            <form id="feedbackForm">
+                <div class="form-group">
+                    <label for="feedbackMessage" class="required">Your Feedback</label>
+                    <textarea class="form-control" id="feedbackMessage" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tutorial Modal -->
+    <div class="modal fade" id="tutorialModal" tabindex="-1" role="dialog" aria-labelledby="tutorialModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tutorialModalLabel">How to Register</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- YouTube Video Iframe -->
+                    <iframe width="450" height="315" src="https://www.youtube.com/embed/ZIS9RWK2fnI"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        // Function to validate email format using regex
+        function validateEmail(email) {
+            var emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z]+\.[A-Za-z]{2,}$/;
+            return emailPattern.test(email);
+        }
+
+        // Function to validate contact number (should start with 6789 and be 10 digits long)
+        function validateContactNumber(contactNumber) {
+            var contactPattern = /^[6-9]\d{9}$/;
+            return contactPattern.test(contactNumber);
+        }
+
+        // Function to show validation feedback
+        function setValidationState(inputField, isValid) {
+            if (isValid) {
+                inputField.classList.remove('invalid');
+                inputField.classList.add('valid');
+            } else {
+                inputField.classList.remove('valid');
+                inputField.classList.add('invalid');
+            }
+        }
+
+        // Validate Contact Form Submission
+        $('#contactForm').on('submit', function (e) {
+            e.preventDefault(); // Prevent form submission to handle validation
+            var name = $('#name').val();
+            var email = $('#email').val();
+            var contact = $('#contact').val();
+            var message = $('#message').val();
+
+            // Validate each field
+            var isEmailValid = validateEmail(email);
+            var isContactValid = validateContactNumber(contact);
+            var isNameValid = name.trim() !== "";
+            var isMessageValid = message.trim() !== "";
+
+            // Set validation state for all fields
+            setValidationState(document.getElementById('email'), isEmailValid);
+            setValidationState(document.getElementById('contact'), isContactValid);
+            setValidationState(document.getElementById('name'), isNameValid);
+            setValidationState(document.getElementById('message'), isMessageValid);
+
+            // Check if all validations passed
+            if (isNameValid && isEmailValid && isContactValid && isMessageValid) {
+                // Use SweetAlert2 for success message
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: 'Your message has been sent!'
+                });
+            } else {
+                // Use SweetAlert2 for error message
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: 'Please fill out the form correctly before submitting.'
+                });
+            }
+        });
+
+        // Validate Feedback Form Submission
+        $('#feedbackForm').on('submit', function (e) {
+            e.preventDefault(); // Prevent default form submission
+            var feedbackMessage = $('#feedbackMessage').val().trim();
+
+            if (feedbackMessage === "") {
+                // Use SweetAlert2 for error
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: 'Feedback message cannot be empty.'
+                });
+                setValidationState(document.getElementById('feedbackMessage'), false);
+            } else {
+                setValidationState(document.getElementById('feedbackMessage'), true);
+                // Use SweetAlert2 for confirmation dialog
+                Swal.fire({
+                    title: 'Confirm Submission',
+                    text: 'Are you sure you want to submit your feedback?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, submit it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Success feedback submission
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Submitted!',
+                            text: 'Thank you for your feedback.'
+                        });
+                    }
+                });
+            }
+        });
+
+        // Real-time validation for the contact form fields
+        $('#name, #email, #contact, #message').on('input', function () {
+            var inputId = $(this).attr('id');
+            if (inputId === 'email') {
+                setValidationState(this, validateEmail($(this).val()));
+            } else if (inputId === 'contact') {
+                setValidationState(this, validateContactNumber($(this).val()));
+            } else {
+                setValidationState(this, $(this).val().trim() !== "");
+            }
+        });
+
+        // Real-time validation for the feedback form field
+        $('#feedbackMessage').on('input', function () {
+            setValidationState(this, $(this).val().trim() !== "");
+        });
+
+        // Display Tutorial Modal dynamically with content passed from the clicked button
+        $('#tutorialModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var title = button.data('title');
+            var content = button.data('content');
+            var modal = $(this);
+            modal.find('.modal-title').text(title);
+            modal.find('.modal-body').text(content);
+        })
+        document.getElementById('logoutButton').addEventListener('click', function() {
+                window.close(); 
+                window.opener.location.href = 'login.html'; 
+            });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <footer class="bg-dark text-white pt-4 mt-4">
+        <div class="container">
+            <div class="row">
+                <!-- Navigation Links -->
+                <div class="col-md-3">
+                    <h5>Navigation</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white f1">Home</a></li>
+                        <li><a href="bike.html" class="text-white f1">Bike Catalog</a></li>
+                        <li><a href="booking.html" class="text-white f1">Online Booking</a></li>
+                        <li><a href="notification.html" class="text-white f1">Notification</a></li>
+                        <li><a href="dashboard.html" class="text-white f1">Dashboard</a></li>
+                        <li><a href="Help.html" class="text-white f1">Help</a></li>
+                        <li><a href="login.html" class="text-white f1">Logout</a></li>
+                 
+                    
+                      </ul>
+                </div>
+                <div class="col-md-1"></div>
+                <!-- Social Media Icons -->
+                <div class="col-md-3 text-center">
+                    <h5>Follow Us</h5>
+                    <a href="https://www.facebook.com/" class="text-white me-3"><i
+                            class="fab fa-facebook fa-2x"></i></a>
+                    <a href="https://www.twitter.com" class="text-white me-3"><i class="fab fa-twitter fa-2x"></i></a>
+                    <a href="https://www.instagram.com" class="text-white me-3"><i
+                            class="fab fa-instagram fa-2x"></i></a>
+                    <a href="https://www.linkedin.com" class="text-white"><i class="fab fa-linkedin fa-2x"></i></a>
+                </div>
+                <div class="col-md-1"></div>
+                <!-- Contact Information -->
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <p>Email: info@bikedealership.com</p>
+                    <p>Phone: +91 9876543210</p>
+                    <p>Address: Hyderabad,Telangana,India.</p>
+                </div>
+            </div>
+
+            <hr class="bg-white">
+            <div class="row">
+                <div class="col text-center">
+                    <p class="mb-0">&copy; 2024 Bike Dealership. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

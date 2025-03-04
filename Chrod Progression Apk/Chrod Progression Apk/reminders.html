@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0">
+    <title>Chord Progression App</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   
+      <style>
+        body{
+            overflow-y: scroll;
+        }
+         /* Custom Active Link */
+nav a.active {
+    color: rgba(213, 238, 17, 0.769) !important;
+}
+
+/* General Nav Links */
+nav a {
+    color: rgb(246, 133, 20) !important;
+    /* margin-right: 150px; */
+}
+
+/* Hover Effect */
+nav a:hover {
+    color: rgba(213, 238, 17, 0.769) !important;
+}
+
+/* Navbar Styling */
+nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(100, 5, 48) !important;
+}
+
+/* Navbar Toggler Icon */
+.navbar-toggler-icon {
+    height: 1em !important;
+}
+        .container {
+            max-width: 900px;
+            margin-top: 50px;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2, h3 {
+            color: #4CAF50;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .btn-custom {
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            padding: 12px 20px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            background-color: #45a049;
+        }
+
+        .modal-content {
+            border-radius: 10px;
+            background: linear-gradient(to right, #ffffff, #d9f9d9);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+        }
+
+        .modal-body input, .form-select {
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 100%;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:invalid {
+            border-color: #dc3545;
+        }
+
+        .alert-custom {
+            background-color: #d4edda;
+            color: #155724;
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.5s ease-in-out;
+        }
+
+        .alert-custom-error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .btn-notify {
+            background-color: #17a2b8;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-notify:hover {
+            background-color: #138496;
+        }
+
+        .notification {
+            background-color: #17a2b8;
+            color: white;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: none;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .notification.success {
+            background-color: #28a745;
+        }
+
+        .notification.error {
+            background-color: #dc3545;
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            border-top: 2px solid #ddd;
+        }
+
+        .modal-footer button {
+            width: 48%;
+        }
+        .navbar-toggler{
+            color: #ccc;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+     <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <a class="navbar-brand" href="index.html">HarmoniQ</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"><i class="fa-solid fa-bars" style="color: #ffffff;"></i></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav"> 
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i>Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="analysis.html"><i class="fas fa-music"></i> Analysis</a></li>
+          <li class="nav-item"><a class="nav-link" href="playback.html"><i class="fas fa-play-circle"></i> Playback</a></li>
+
+          <li class="nav-item"><a class="nav-link" href="community.html"><i class="fas fa-users"></i> Community</a></li>
+          <li class="nav-item"><a class="nav-link active" href="reminders.html"><i class="fas fa-bell"></i> Reminders</a></li>
+      
+          <li class="nav-item"><a class="nav-link" href="help.html"><i class="fas fa-question-circle"></i> Help</a></li>     
+             <li class="nav-item"><a  class="nav-link" href="login.html" id="logoutButton"><i class="fa fa-sign-out"
+                        aria-hidden="true"></i></a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h2>Set Your Reminders</h2>
+     <div class="text-center">
+        <p>Set reminders for practice sessions, analysis deadlines, or community events.</p>
+ 
+    <button type="button" class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#reminderModal">
+        Set Reminder
+    </button></div>
+
+    <!-- Reminder Modal -->
+    <div class="modal fade" id="reminderModal" tabindex="-1" aria-labelledby="reminderModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reminderModalLabel">Set Your Reminder</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="reminderForm">
+                        <div class="mb-3">
+                            <label for="reminderType" class="form-label">Reminder Type</label>
+                            <select class="form-select" id="reminderType" required>
+                                <option value="" disabled selected>Select Type</option>
+                                <option value="practice">Practice Session</option>
+                                <option value="deadline">Analysis Deadline</option>
+                                <option value="event">Community Event</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="reminderTime" class="form-label">Reminder Time</label>
+                            <input type="datetime-local" class="form-control" id="reminderTime" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="reminderMessage" class="form-label">Message</label>
+                            <input type="text" class="form-control" id="reminderMessage" placeholder="Enter a reminder message" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-custom" id="setReminderBtn">Set Reminder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-custom" id="successAlert">
+        Your reminder has been set successfully!
+    </div>
+<div class="text-center">
+    <h3 class="mt-5">Progress Milestone</h3>
+    <button type="button" class="btn btn-notify" id="milestoneBtn">
+        Reach Milestone
+    </button>
+    <div class="notification success" id="milestoneNotification1" style="display: none;">
+        Goal Update: Congratulations! You have reached a milestone in your learning!
+    </div>
+    <div class="notification success" id="milestoneNotification2" style="display: none;">
+        Goal Update: Keep up the great work! You are on track!
+    </div>
+    <div class="notification success" id="milestoneNotification3" style="display: none;">
+        Goal Update: Almost there! Just a bit more effort!
+    </div>
+    <div class="notification success" id="milestoneNotification4" style="display: none;">
+        Goal Update: Amazing progress! Keep pushing forward!
+    </div>
+    <div class="notification success" id="milestoneNotification5" style="display: none;">
+        Goal Update: You did it! Congratulations on achieving this milestone!
+    </div>
+
+    <h3 class="mt-5">Community Event</h3>
+    <button type="button" class="btn btn-notify text-center"  id="eventBtn">
+       Upcoming Events
+    </button>
+
+    <div class="notification" id="notification" style="display: none;">
+        Event Information Will Be Available Soon
+    </div>
+</div>
+</div>
+
+<script>
+    // Set the min attribute to tomorrow's date for the datetime input
+    function getTomorrowDate() {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const year = tomorrow.getFullYear();
+        const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
+        const day = String(tomorrow.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}T00:00`;
+    }
+
+    document.getElementById('reminderTime').setAttribute('min', getTomorrowDate());
+
+    // Reminder functionality with validation
+    document.getElementById('setReminderBtn').addEventListener('click', function() {
+        const reminderTime = document.getElementById('reminderTime').value;
+        const reminderMessage = document.getElementById('reminderMessage').value;
+        const reminderType = document.getElementById('reminderType').value;
+
+        // Form validation
+        if (!reminderTime || !reminderMessage || !reminderType) {
+            alert('Please fill out all fields');
+            return;
+        }
+
+        // Simulating reminder setup
+        alert(`Reminder set for ${reminderTime} with message: "${reminderMessage}" (${reminderType})`);
+
+        // Show success message
+        document.getElementById('successAlert').style.display = 'block';
+
+        // Reset form and close modal
+        document.getElementById('reminderForm').reset();
+        setTimeout(() => {
+            document.getElementById('successAlert').style.display = 'none';
+            
+            // Close the modal
+            const myModal = new bootstrap.Modal(document.getElementById('reminderModal'));
+            myModal.hide();  // Close the modal
+            
+        }, 3000);
+    });
+
+    // Milestone notification with multiple messages
+    document.getElementById('milestoneBtn').addEventListener('click', function() {
+        let notifications = [
+            document.getElementById('milestoneNotification1'),
+            document.getElementById('milestoneNotification2'),
+            document.getElementById('milestoneNotification3'),
+            document.getElementById('milestoneNotification4'),
+            document.getElementById('milestoneNotification5')
+        ];
+
+        notifications.forEach((notification, index) => {
+            setTimeout(() => {
+                notification.style.display = 'block';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 4000);
+            }, index * 5000);  // Delay each notification by 5 seconds
+        });
+    });
+
+    // Event notification
+    document.getElementById('eventBtn').addEventListener('click', function() {
+        const notification = document.getElementById('notification');
+        notification.style.display = 'block';
+        setTimeout(() => {
+            notification.style.display = 'none';
+        }, 4000);
+    });
+    document.getElementById('logoutButton').addEventListener('click', function() {
+            window.close(); 
+            window.opener.location.href = 'login.html'; 
+        });
+</script>
+
+</body>
+</html>

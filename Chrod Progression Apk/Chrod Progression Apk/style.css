@@ -1,0 +1,155 @@
+.active{
+    color: rgba(213, 238, 17, 0.769);
+}
+nav a{
+    color:rgb(246, 133, 20);
+    /* margin-right: 150px; */
+}
+nav a:hover{
+    color: rgba(213, 238, 17, 0.769);
+    
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(100, 5, 48);
+}
+.navbar-toggler-icon{
+    height: 1em;
+}
+
+body {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: #ed070779;
+    margin: 0;
+    padding-top: 70px;
+    /* Add padding to avoid navbar overlap */
+    transition: background-color 0.3s ease;
+    background-image: url('https://img.freepik.com/premium-photo/abstract-electric-guitar-beautiful-floral-background_5095-4354.jpg');
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-attachment: fixed;
+}
+
+  
+  footer {
+    background-color: #272323fa;
+    color: #26abccca;
+    padding: 40px 0;
+  }
+  
+  .footer-title {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    border-bottom:1px solid rgb(224, 118, 169);
+  }
+  
+  .footer-links {
+    list-style: none;
+    padding: 0;
+  }
+  
+  
+  .footer-links a {
+    color: #f7ba85;
+    text-decoration: none;
+    transition: color 0.3s;
+ 
+  }
+  
+  .footer-links a:hover {
+    color: #f0c209;
+    text-decoration: underline;
+  }
+  
+  .social-icons {
+    /* display: flex; */
+    gap: 15px;
+  }
+  
+  .social-link {
+    font-size: 20px;
+    color: #0278ee;
+    transition: transform 0.3s;
+  }
+  
+  .social-link:hover {
+    transform: scale(1.2);
+    color: #f9f7f7;
+  }
+  
+  .footer-form input {
+    padding: 10px;
+    width: 70%;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .footer-form button {
+    padding: 10px 15px;
+    background-color: #e6cd69;
+    border: none;
+    color: #000;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .footer-form button:hover {
+    background-color: #f5c900;
+  }
+  
+  @media (max-width: 768px) {
+    .footer-form input {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    .footer-form button {
+      width: 100%;
+    }
+  }
+  .fade-alert {
+    display: none;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 5px;
+    animation: fadeIn 0.5s, fadeOut 0.5s 3s;
+    z-index: 1000;
+    font-size: 14px;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+  
+  
+  
+
+  

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Music Composition App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        
+        /* Global Styles */
+        body {
+            background-color: #f0f4f8;
+           
+            color: #333;
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+
+        h1 {
+            border-radius: 10px;
+            background-color: #33333348;
+            font-size: 2.5rem;
+            color: #e65116fe;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 50px;
+            animation: glowText 1.5s infinite alternate;
+}
+
+@keyframes glowText {
+  from {
+    text-shadow: 2px 2px 10px rgba(227, 116, 189, 0.8);
+  }
+  to {
+    text-shadow: 2px 2px 20px rgb(255, 0, 195);
+  }
+
+        }
+
+        .container-fluid {
+            width: 100%;
+            margin: auto;
+        }
+
+        /* Card Styles */
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease-in-out;
+            animation: slideIn 1s ease-out;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-header {
+            background-color: #6c5ce7;
+            color: white;
+            font-weight: bold;
+            border-radius: 15px 15px 0 0;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #333;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .btn-share {
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            padding: 10px 20px;
+            border: none;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-share:hover {
+            background-color: #218838;
+        }
+
+        .btn-comment,
+        .btn-edit,
+        .btn-delete {
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            padding: 8px;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-comment:hover,
+        .btn-edit:hover,
+        .btn-delete:hover {
+            background-color: #0056b3;
+        }
+
+        .shared-post {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .shared-post p {
+            margin: 0;
+            color: #555;
+        }
+
+        .comments-section {
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .comment {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 8px;
+            margin-bottom: 5px;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .comment input {
+            width: 90%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .comment .btn-edit,
+        .comment .btn-delete {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 0.8rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Chart Styling */
+        #scoreChart {
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        /* Ensure the canvas adjusts correctly for all screen sizes */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+        }
+
+        .badge {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        .navbar-toggler{
+            color: #ccc;
+            /* border-radius: 1px solid white; */
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <a class="navbar-brand" href="index.html">HarmoniQ</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"><i class="fa-solid fa-bars" style="color: #ffffff;"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav"> 
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i>Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="analysis.html"><i class="fas fa-music"></i> Analysis</a></li>
+              <li class="nav-item"><a class="nav-link" href="playback.html"><i class="fas fa-play-circle"></i> Playback</a></li>
+    
+              <li class="nav-item"><a class="nav-link active" href="community.html"><i class="fas fa-users"></i> Community</a></li>
+              <li class="nav-item"><a class="nav-link" href="reminders.html"><i class="fas fa-bell"></i> Reminders</a></li>
+          
+              <li class="nav-item"><a class="nav-link" href="help.html"><i class="fas fa-question-circle"></i> Help</a></li>     
+                 <li class="nav-item"><a  class="nav-link" href="login.html" id="logoutButton"><i class="fa fa-sign-out"
+                            aria-hidden="true"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="row justify-content-center">
+            <h1>Music Composition Dashboard</h1>
+        </div>
+
+        <!-- In-App Data Visualization Section -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Musical Data Visualization</h4>
+                        </div>
+                        <div class="card-body">
+                            <!-- Add a wrapper div to make the chart responsive -->
+                            <div class="chart-container">
+                                <canvas id="scoreChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Tracking Section -->
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Progress Tracker</h4>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Completed Analyses:</strong> <span id="completed-analyses">0</span></p>
+                            <p><strong>Chord Recognition Mastery:</strong> <span id="chord-mastery">0%</span></p>
+                            <p><strong>Achievements:</strong> <span id="achievement-badges">None</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Community Sharing Section -->
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Share Your Chord Progression</h4>
+                        </div>
+                        <div class="card-body">
+                            <textarea id="user-chord" class="form-control" rows="4" placeholder="Enter your chord progression here..."></textarea>
+                            <button id="btn-share" class="btn btn-share mt-3">Share Progress</button>
+                            <div id="community-feedback" class="mt-3">
+                                <h5>Community Feedback</h5>
+                                <div id="comments-list"></div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Data Visualization (Bar Chart)
+        const ctx = document.getElementById('scoreChart').getContext('2d');
+        const scoreChart = new Chart(ctx, {
+            type: 'bar', // Bar chart
+            data: {
+                labels: ['0:00', '0:10', '0:20', '0:30', '0:40', '0:50', '1:00'],
+                datasets: [{
+                    label: 'Playback Progress',
+                    data: [0, 10, 25, 40, 60, 80, 100], // Initial data
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true, // Ensure responsiveness
+                maintainAspectRatio: false, // Allow the chart to resize properly
+                scales: {
+                    x: { title: { display: true, text: 'Time (minutes)' } },
+                    y: { title: { display: true, text: 'Progress (%)' }, max: 100, min: 0 }
+                }
+            }
+        });
+
+        // Function to simulate progress update every 5 seconds
+        let progressCounter = 0;
+        function simulateProgress() {
+            // Simulate increasing progress by 5% every 5 seconds
+            progressCounter += 5;
+            if (progressCounter > 100) progressCounter = 100;
+
+            // Update the chart data
+            scoreChart.data.datasets[0].data.push(progressCounter);
+            scoreChart.data.labels.push(`${(scoreChart.data.labels.length * 10)}s`);
+            scoreChart.update();
+
+            // Update the progress tracker
+            document.getElementById('completed-analyses').innerText = progressCounter;
+            document.getElementById('chord-mastery').innerText = `${progressCounter}%`;
+        }
+
+        // Simulate progress every 5 seconds
+        setInterval(simulateProgress, 5000);
+
+        // Share Progress Button
+        document.getElementById('btn-share').addEventListener('click', function () {
+            const chordInput = document.getElementById('user-chord').value;
+
+            if (chordInput.trim() !== "") {
+                const newPost = document.createElement('div');
+                newPost.classList.add('shared-post');
+                newPost.innerHTML = `
+                    <p><strong>Your Chord Progression:</strong> ${chordInput}</p>
+                   
+                    <div class="comments-section">
+                        <input type="text" placeholder="Write a comment..." class="form-control mb-2 comment-input">
+                        <button class="btn btn-comment btn-submit-comment">Submit Comment</button>
+                        <div class="comments-list"></div>
+                    </div>
+                `;
+
+                document.getElementById('comments-list').appendChild(newPost);
+
+                // Clear the input field
+                document.getElementById('user-chord').value = '';
+            }
+        });
+
+        // Event delegation for comment submission, edit, and delete
+        document.getElementById('comments-list').addEventListener('click', function (e) {
+            // Submit comment
+            if (e.target && e.target.classList.contains('btn-submit-comment')) {
+                const commentInput = e.target.previousElementSibling;
+                const commentText = commentInput.value.trim();
+
+                if (commentText !== "") {
+                    const commentDiv = document.createElement('div');
+                    commentDiv.classList.add('comment');
+                    commentDiv.textContent = commentText;
+
+                    // Create Edit and Delete buttons
+                    const editButton = document.createElement('button');
+                    editButton.classList.add('btn', 'btn-edit');
+                    editButton.textContent = 'Edit';
+
+                    const deleteButton = document.createElement('button');
+                    deleteButton.classList.add('btn', 'btn-delete');
+                    deleteButton.textContent = 'Delete';
+
+                    commentDiv.appendChild(editButton);
+                    commentDiv.appendChild(deleteButton);
+
+                    // Append the comment
+                    commentInput.value = '';
+                    e.target.parentNode.querySelector('.comments-list').appendChild(commentDiv);
+                }
+            }
+
+            // Edit comment
+            if (e.target && e.target.classList.contains('btn-edit')) {
+                const commentDiv = e.target.parentNode;
+                const currentText = commentDiv.textContent.replace('EditDelete', '').trim();
+                const newText = prompt('Edit your comment:', currentText);
+
+                if (newText) {
+                    commentDiv.firstChild.textContent = newText;
+                }
+            }
+
+            // Delete comment
+            if (e.target && e.target.classList.contains('btn-delete')) {
+                const commentDiv = e.target.parentNode;
+                commentDiv.remove();
+            }
+        });
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            window.close(); 
+            window.opener.location.href = 'login.html'; 
+        });
+
+
+        
+    </script>
+   
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

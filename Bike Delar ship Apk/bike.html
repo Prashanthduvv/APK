@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no,max-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome -->
+
+    <title>Bike Dealership</title>
+    <style>
+        body {
+            overflow-x: hidden;
+            background-color: #f8f9fa;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-image: url('https://static.vecteezy.com/system/resources/previews/027/533/480/non_2x/car-or-bike-smokie-background-realistic-ai-generative-free-photo.jpg');
+ 
+        }
+
+        .card {
+            margin: 15px 0;
+            transition: transform 0.1s ease-in-out, box-shadow 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .availability-in-stock {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .availability-out-of-stock {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        /* Search and Filter Styles */
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        #suggestions {
+            position: absolute;
+            z-index: 9999;
+            background-color: white;
+            border: 1px solid #ccc;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .suggestion-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .suggestion-item:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Modal styling */
+        .modal-img {
+            width: 100%;
+        }
+
+        .form-select {
+            transition: background-color 0.3s ease;
+        }
+
+        .form-select:focus {
+            background-color: #f0f0f0;
+        }
+
+        .catalog {
+            height: 500px;
+        }
+        label{
+            color: white;
+        }
+        div h2,h4{
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+        <div class="container-fluid">
+            <a class="navbar-brand ms-1" href="index.html">BikeWorld</a>
+            <button class="navbar-toggler me-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="bike.html">Bike Catalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="booking.html">Online Booking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="notification.html">Notifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Help.html">Help</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html" id="logoutButton">𝐋𝐨𝐠𝐨𝐮𝐭</a>
+                      </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+
+        <!-- Search Bar with Suggestions -->
+        <div class="row">
+            <div class="col-md-10">
+                <input type="text" id="search" class="form-control" placeholder="Search for bikes..."
+                    oninput="showSuggestions(this.value)">
+                <div id="suggestions"></div>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary mt-2" onclick="clearSearch()">Clear Search</button>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <label for="bikeType">Bike Type:</label>
+                <select id="bikeType" class="form-control" onchange="filterBikes()">
+                    <option value="">All Types</option>
+                    <option value="Mountain">Mountain</option>
+                    <option value="Road">Road</option>
+                    <option value="Cruiser">Cruiser</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label for="ratingFilter">Rating:</label>
+                <select id="ratingFilter" class="form-control" onchange="filterBikes()">
+                    <option value="">All Ratings</option>
+                    <option value="4">4 Stars & Up</option>
+                    <option value="3">3 Stars & Up</option>
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label for="specificationFilter">Specifications:</label>
+                <select id="specificationFilter" class="form-control" onchange="filterBikes()">
+                    <option value="">All Specs</option>
+                    <option value="Disc Brake">Disc Brake</option>
+                    <option value="Lightweight">Lightweight</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <label for="brandFilter">Brand:</label>
+                <select id="brandFilter" class="form-control" onchange="filterBikes()">
+                    <option value="">All Brands</option>
+                    <option value="Brand A">Brand A</option>
+                    <option value="Brand B">Brand B</option>
+                    <option value="Brand C">Brand C</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="minPrice">Minimum:</label>
+                <input type="number" id="minPrice" class="form-control" placeholder="Min Price" min="0"
+                    oninput="validateMinPrice(this); filterBikes()">
+            </div>
+            <div class="col-md-4">
+                <label for="maxPrice">Maximum:</label>
+                <input type="number" id="maxPrice" class="form-control" placeholder="Max Price" min="0"
+                    oninput="filterBikes()">
+            </div>
+        </div>
+
+        <div class="container mt-4">
+            <!-- Sort by filter -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="sortFilter" class="form-label">Sort by:</label>
+                    <select id="sortFilter" class="form-select" onchange="sortBikes()">
+                        <option value="featured">Featured</option>
+                        <option value="new-arrivals">New Arrivals</option>
+                        <option value="top-rated">Top Rated</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Bike Catalog -->
+            <div class="row mt-4 " id="bike-catalog">
+                <div class="col-md-12">
+                    <h2>Bike Catalog</h2>
+                    <div class="row" id="bikeCardsContainer"></div>
+                </div>
+            </div>
+            <!-- Dealership Listings -->
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h2>Dealership Listings</h2>
+                    <div class="row" id="dealershipCardsContainer"></div>
+
+                    <!-- Add New Dealer Form -->
+                    <div class="new-dealer-form">
+                        <h4>Add a New Dealership</h4>
+                        <div class="input-group">
+                            <input type="text" id="dealerName" class="form-control" placeholder="Dealership Name"
+                                required>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="dealerLocation" class="form-control" placeholder="Location" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="number" id="dealerRating" class="form-control" placeholder="Rating (0-5)"
+                                min="0" max="5" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="dealerContact" class="form-control" placeholder="Contact Number"
+                                required>
+                        </div>
+                        <button class="btn btn-success" onclick="addDealer()">Add Dealership</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Feedback Section -->
+            <div class="feedback-form mt-4">
+                <h2>User Feedback</h2>
+                <form onsubmit="submitFeedback(event)">
+                    <textarea class="form-control" id="userFeedback" placeholder="Your feedback here..."
+                        required></textarea>
+                    <button type="submit" class="btn btn-success mt-3 mb-4">Submit Feedback</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Image Zoom Modal -->
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel">Bike Image</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img id="zoomedImage" src="" class="img-fluid modal-img" alt="Zoomed Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        // Sample Data
+        const bikes = [
+            {
+                id: 1, name: "Mountain Beast", type: "Mountain", brand: "Brand A", price: 499.99, availability: "In Stock", rating: 4.8, image: "https://images.hindustantimes.com/auto/auto-images/bikes/joyebike/joyebikebeast/1630605008708_joyebikebeast-2", description: "A sturdy mountain bike perfect for rough terrains.",
+                specifications: ["Disc Brake", "Lightweight"], isFeatured: true, isNewArrival: false,
+            },
+            { id: 2, name: "Speedster 3000", type: "Road", brand: "Brand B", price: 799.99, availability: "In Stock", rating: 4.5, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQflrfNg7dPoOUCN1oA9avJx3YyLlNKV20N9A&s", description: "A lightweight bike designed for speed and efficiency.", specifications: ["Comfortable", "Lightweight"], isFeatured: false, isNewArrival: false, },
+            { id: 3, name: "Cruiser Deluxe", type: "Cruiser", brand: "Brand C", price: 299.99, availability: "Out of Stock", rating: 4.0, image: "https://bd.gaadicdn.com/processedimages/hero/hf-delux-bs6/source/hf-delux-bs6658ebb219851e.jpg", specifications: ["Lightweight"], description: "A comfortable cruiser for leisurely rides.", isFeatured: false, isNewArrival: true, },
+            { id: 4, name: "Explorer Pro", type: "Mountain", brand: "Brand D", price: 599.99, availability: "In Stock", rating: 4.9, image: "https://bd.gaadicdn.com/processedimages/triumph/tiger-1200/640X309/tiger-12006375c18c9ace4.jpg", description: "An advanced bike for serious mountain biking.", specifications: ["Efficient", "Lightweight"], isFeatured: false, isNewArrival: false, },
+            { id: 5, name: "City Commuter", type: "Cruiser", brand: "Brand E", price: 349.99, availability: "In Stock", rating: 4.6, image: "https://www.carandbike.com/_next/image?url=https%3A%2F%2Fimages.carandbike.com%2Fbike-images%2Fbig%2Fbajaj%2Fpulsar-n250%2Fbajaj-pulsar-n250.jpg%3Fv%3D9&w=3840&q=75", specifications: ["Efficient"], description: "Perfect for urban commuting with style,racing..", isFeatured: true, isNewArrival: false, },
+            { id: 6, name: "Racer 500", type: "Road", brand: "Brand F", price: 799.99, availability: "In Stock", rating: 4.7, image: "https://imgd.aeplcdn.com/1056x594/n/bw/models/colors/honda-select-model-grand-prix-red-1644556207419.jpg?q=80", description: "Built for speed, this bike is perfect for racing.", specifications: ["Efficient", "Comfortable"], isFeatured: false, isNewArrival: true, },
+        ];
+
+
+        const dealerships = [
+            { id: 1, name: "City Bikes", location: "Downtown", rating: 4.5, contact: "6789123456", rating: 4.5 },
+            { id: 2, name: "Speed Cycles", location: "Uptown", rating: 4.7, contact: "6789234567", rating: 4.6 },
+            { id: 3, name: "Downtown Bikes", location: "Downtown", contact: "7854287285", rating: 4.9 },
+            { id: 4, name: "Mountain Gear", location: "Uptown", contact: "9468287285", rating: 4.7 },
+            { id: 5, name: "Cycle World", location: "East Side", contact: "6852347285", rating: 4.8 },
+            { id: 6, name: "Speedy Bikes", location: "West End", contact: "8854282385", rating: 4.6 }
+        ];
+        // Render Dealerships
+        function renderDealerships() {
+            const dealershipCardsContainer = document.getElementById('dealershipCardsContainer');
+            dealershipCardsContainer.innerHTML = dealerships.map(dealer => `
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">${dealer.name}</h5>
+                        <p class="card-text">Location: ${dealer.location}</p>
+                        <p class="card-text">Rating: ${dealer.rating} / 5</p>
+                        <p class="card-text">Contact: ${dealer.contact}</p>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+        }
+
+        // Call the function immediately after the page loads
+        window.onload = function () {
+            renderDealerships();
+        };
+        function showSuggestions(value) {
+            const suggestions = bikes.filter(bike => bike.name.toLowerCase().includes(value.toLowerCase()));
+            const suggestionsContainer = document.getElementById('suggestions');
+            suggestionsContainer.innerHTML = suggestions.map(suggestion => `<div class="suggestion-item" onclick="selectSuggestion('${suggestion.name}')">${suggestion.name}</div>`).join('');
+            suggestionsContainer.style.display = suggestions.length > 0 ? 'block' : 'none';
+        }
+
+        // Select a Suggestion
+        function selectSuggestion(name) {
+            document.getElementById('search').value = name;
+            document.getElementById('suggestions').style.display = 'none';
+        }
+
+        function renderBikes(bikeList) {
+            const container = document.getElementById("bikeCardsContainer");
+            container.innerHTML = ""; // Clear existing bikes
+            bikeList.forEach(bike => {
+                const card = document.createElement("div");
+                card.className = "col-md-4";
+                card.innerHTML = `
+                        <div class="card catalog">
+                            <img src="${bike.image}" class="card-img-top" style="height:200px" alt="${bike.name}" onclick="zoomImage('${bike.image}')">
+                            <div class="card-body">
+                                <h5 class="card-title">${bike.name}</h5>
+                                <p class="card-text">${bike.description}</p>
+                                <p class="availability-${bike.availability.toLowerCase().replace(" ", "-")}">${bike.availability}</p>
+                                <p class="card-text"><strong>Price: $${bike.price.toFixed(2)}</strong></p>
+                                <p class="card-text">Rating: ${bike.rating} <i class="fas fa-star"></i></p>
+                               <button class="btn btn-primary" onclick="redirectToDetails('${bike.id}')">More Details</button>
+   </div>
+                        </div>
+                    `;
+                container.appendChild(card);
+            });
+        }
+
+        function showAlert(bikeName) {
+            Swal.fire({
+                title: bikeName,
+                text: "More details coming soon!",
+                icon: 'info',
+                confirmButtonText: 'OK'
+            });
+        }
+
+        function zoomImage(imageSrc) {
+            const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+            document.getElementById("zoomedImage").src = imageSrc;
+            modal.show();
+        }
+
+        function showSuggestions(value) {
+            const suggestionsContainer = document.getElementById('suggestions');
+            suggestionsContainer.innerHTML = '';
+            if (value) {
+                const filteredBikes = bikes.filter(bike => bike.name.toLowerCase().includes(value.toLowerCase()));
+                filteredBikes.forEach(bike => {
+                    const suggestionItem = document.createElement('div');
+                    suggestionItem.className = 'suggestion-item';
+                    suggestionItem.innerText = bike.name;
+                    suggestionItem.onclick = () => {
+                        document.getElementById('search').value = bike.name;
+                        suggestionsContainer.innerHTML = '';
+                        filterBikes();
+                    };
+                    suggestionsContainer.appendChild(suggestionItem);
+                });
+            }
+        }
+
+        function clearSearch() {
+            document.getElementById('search').value = '';
+            document.getElementById('suggestions').innerHTML = '';
+            renderBikes(bikes); // Reset to show all bikes
+        }
+
+        function validateMinPrice(input) {
+            const minPrice = parseFloat(input.value);
+            const maxPrice = parseFloat(document.getElementById('maxPrice').value);
+            if (maxPrice < minPrice && maxPrice !== '') {
+                document.getElementById('maxPrice').value = '';
+            }
+        }
+
+        function filterBikes() {
+            const searchQuery = document.getElementById('search').value.toLowerCase();
+            const bikeType = document.getElementById('bikeType').value;
+            const rating = document.getElementById('ratingFilter').value;
+            const specification = document.getElementById('specificationFilter').value;
+            const brand = document.getElementById('brandFilter').value;
+            const minPrice = parseFloat(document.getElementById('minPrice').value) || 0;
+            const maxPrice = parseFloat(document.getElementById('maxPrice').value) || Infinity;
+
+            const filteredBikes = bikes.filter(bike => {
+                const isTypeMatch = bikeType ? bike.type === bikeType : true;
+                const isBrandMatch = brand ? bike.brand === brand : true;
+                const isSpecificationMatch = specification ? bike.specifications.includes(specification) : true;
+                const isRatingMatch = rating ? bike.rating >= rating : true;
+                const isPriceMatch = bike.price >= minPrice && bike.price <= maxPrice;
+                const isSearchMatch = bike.name.toLowerCase().includes(searchQuery);
+
+                return isTypeMatch && isBrandMatch && isSpecificationMatch && isRatingMatch && isPriceMatch;
+            });
+
+            renderBikes(filteredBikes);
+        }
+        function redirectToDetails(bikeId) {
+            localStorage.setItem('selectedBikeId', bikeId); // Store selected bike ID
+            window.location.href = 'details.html'; // Redirect to details page
+        }
+
+        function sortBikes() {
+            const sortCriteria = document.getElementById('sortFilter').value;
+            let sortedBikes = [...bikes];
+
+            if (sortCriteria === "featured") {
+                sortedBikes.sort((a, b) => (a.isFeatured === b.isFeatured) ? 0 : (a.isFeatured ? -1 : 1));
+            } else if (sortCriteria === "new-arrivals") {
+                sortedBikes.sort((a, b) => (a.isNewArrival === b.isNewArrival) ? 0 : (a.isNewArrival ? -1 : 1));
+            } else if (sortCriteria === "top-rated") {
+                sortedBikes.sort((a, b) => b.rating - a.rating);
+            }
+
+            renderBikes(sortedBikes);
+        }
+
+        // Initial render of bikes
+        renderBikes(bikes);
+        // Add New Dealer
+        // Add New Dealer
+        function addDealer() {
+            // Get form values
+            const dealerName = document.getElementById('dealerName').value.trim();
+            const dealerLocation = document.getElementById('dealerLocation').value.trim();
+            const dealerRating = document.getElementById('dealerRating').value.trim();
+            const dealerContact = document.getElementById('dealerContact').value.trim();
+
+            // Regex patterns
+            const nameLocationPattern = /^[a-zA-Z\s]+$/; // Only letters and spaces
+            const contactPattern = /^[6-9]\d{9}$/; // Start with 6/7/8/9 and total 10 digits
+
+            // Validations
+            if (!nameLocationPattern.test(dealerName)) {
+                Swal.fire('Error', 'Dealership name must contain only letters.', 'error');
+                return;
+            }
+            if (!nameLocationPattern.test(dealerLocation)) {
+                Swal.fire('Error', 'Location must contain only letters.', 'error');
+                return;
+            }
+            if (dealerRating < 1 || dealerRating > 5 || dealerRating === "") {
+                Swal.fire('Error', 'Rating must be a number between 1 and 5.', 'error');
+                return;
+            }
+            if (!contactPattern.test(dealerContact)) {
+                Swal.fire('Error', 'Contact number must start with 6, 7, 8, or 9 and be exactly 10 digits.', 'error');
+                return;
+            }
+
+            // If all validations pass, add dealership
+            dealerships.push({
+                name: dealerName,
+                location: dealerLocation,
+                rating: dealerRating,
+                contact: dealerContact
+            });
+
+            // Show success message
+            Swal.fire('Success!', 'New dealership added!', 'success');
+
+            // Update dealerships display
+            renderDealerships();
+
+            // Clear the form
+            clearDealerForm();
+        }
+
+        function clearDealerForm() {
+            document.getElementById('dealerName').value = '';
+            document.getElementById('dealerLocation').value = '';
+            document.getElementById('dealerRating').value = '';
+            document.getElementById('dealerContact').value = '';
+        }
+        function submitFeedback(event) {
+                event.preventDefault();
+                const feedback = document.getElementById('userFeedback').value;
+                Swal.fire('Thank You!', 'Your feedback has been submitted.', 'success');
+                document.getElementById('userFeedback').value = '';
+            }
+            document.getElementById('logoutButton').addEventListener('click', function() {
+                window.close(); 
+                window.opener.location.href = 'login.html'; 
+            });
+    </script>
+    <footer class="bg-dark text-white pt-4 mt-4">
+        <div class="container">
+            <div class="row">
+                <!-- Navigation Links -->
+                <div class="col-md-3">
+                    <h5>Navigation</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white f1">Home</a></li>
+                        <li><a href="bike.html" class="text-white f1">Bike Catalog</a></li>
+                        <li><a href="booking.html" class="text-white f1">Online Booking</a></li>
+                        <li><a href="notification.html" class="text-white f1">Notification</a></li>
+                        <li><a href="dashboard.html" class="text-white f1">Dashboard</a></li>
+                        <li><a href="Help.html" class="text-white f1">Help</a></li>
+                        <li><a href="login.html" class="text-white f1">Logout</a></li>
+                 
+                    
+                      </ul>
+                </div>
+                <div class="col-md-1"></div>
+                <!-- Social Media Icons -->
+                <div class="col-md-3 text-center">
+                    <h5>Follow Us</h5>
+                    <a href="https://www.facebook.com/" class="text-white me-3"><i
+                            class="fab fa-facebook fa-2x"></i></a>
+                    <a href="https://www.twitter.com" class="text-white me-3"><i class="fab fa-twitter fa-2x"></i></a>
+                    <a href="https://www.instagram.com" class="text-white me-3"><i
+                            class="fab fa-instagram fa-2x"></i></a>
+                    <a href="https://www.linkedin.com" class="text-white"><i class="fab fa-linkedin fa-2x"></i></a>
+                </div>
+                <div class="col-md-1"></div>
+                <!-- Contact Information -->
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <p>Email: info@bikedealership.com</p>
+                    <p>Phone: +91 9876543210</p>
+                    <p>Address: Hyderabad,Telangana,India.</p>
+                </div>
+            </div>
+
+            <hr class="bg-white">
+            <div class="row">
+                <div class="col text-center">
+                    <p class="mb-0">&copy; 2024 Bike Dealership. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+  
+</body>
+
+</html>
